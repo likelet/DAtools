@@ -24,6 +24,10 @@ public class BED {
     private String blockSizes;//A comma-separated list of the block sizes. The number of items in this list should correspond to blockCount
     private String blockStart;//A comma-separated list of block starts. All of the blockStart positions should be calculated relative to chromStart. The number of items in this list should correspond to blockCount. 
 
+    public BED() {
+    }
+
+    
     public BED(String chrm,int start,int end, String name, String strand) {
         this.chrom=chrm;
         this.chromStart=start;
@@ -156,13 +160,13 @@ public class BED {
         this.thickStart = thickStart;
     }
 
-    public String print(){
+    public String print12column(){
         String tempstr="";
         tempstr=chrom+"\t"+chromStart+"\t"+chromEnd+"\t"+name+"\t"+score+"\t"+strand+"\t"+thickStart+"\t"+thickEnd+"\t"+itemRgb+"\t"+blockCount+"\t"+blockSizes+"\t"+blockStart;
         tempstr=tempstr.substring(0,tempstr.length()-1);
         return tempstr;
     }
-    public String print2(){
+    public String print5column(){
         String tempstr="";
         tempstr=chrom+"\t"+chromStart+"\t"+chromEnd+"\t"+name+"\t"+strand;
         

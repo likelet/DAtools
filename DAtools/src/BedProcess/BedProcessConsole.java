@@ -17,9 +17,12 @@ public class BedProcessConsole {
      public BedProcessConsole(String[] args) throws IOException {
          if (args.length == 1) {
                 System.out.println("Unique BED file using position information \r\n\t\tCMD : java -jar dataAnalysisTools.jar -bed -mode uniq in.bed out.bed");
+                System.out.println("Intersect 2 BED file\r\n\t\tCMD : java -jar dataAnalysisTools.jar -bed -mode intersect in1.bed in2.bed out.bed");
                 
             }  else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("uniq")){
                 new uniqueBed(args[3], args[4]);
+            }else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("intersect")){
+                new GetIntersectBed(args[3], args[4],args[5]);
             }
      }
 }
