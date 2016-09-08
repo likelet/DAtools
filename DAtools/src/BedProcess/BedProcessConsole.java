@@ -5,6 +5,8 @@
  */
 package BedProcess;
 
+import BedProcess.Unibed.uniqueBed;
+import BedProcess.intersectBed.GetIntersectBed;
 import ExomeSeqAnalysisPipe.SNPfrequencyInSamples.SNPfrequencyInSamples;
 import java.io.IOException;
 import pub.FunctionClass;

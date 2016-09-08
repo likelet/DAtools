@@ -2,7 +2,7 @@
  * unique bed items using start and end information
  I also consitdered the score information which indicated the copy number of reads during sequence level deduplication stop
  */
-package BedProcess;
+package BedProcess.Unibed;
 
 import java.io.BufferedReader;
 import java.io.File;
