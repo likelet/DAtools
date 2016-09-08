@@ -52,11 +52,7 @@ public class Console {
     public static void main(String[] args) throws SpecialException, IOException, FileNotFoundException, ParserConfigurationException {
         long start = System.nanoTime();
         String version="2.7.2";
-        System.out.println("Free memory (Mb): "
-                + Runtime.getRuntime().freeMemory()/1024/1024);
-        /* Total memory currently available to the JVM */
-        System.out.println("Total memory available to JVM (Mb): "
-                + Runtime.getRuntime().totalMemory()/1024/1024);
+        System.out.println();
         if (args.length == 0) {
             System.out.println(ToolsforCMD.getDAtoolstr());
             System.out.println("Java based Data Analysis tool, version "+version+"\r\n");

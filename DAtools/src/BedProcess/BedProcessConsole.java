@@ -10,6 +10,7 @@ import BedProcess.intersectBed.GetIntersectBed;
 import ExomeSeqAnalysisPipe.SNPfrequencyInSamples.SNPfrequencyInSamples;
 import java.io.IOException;
 import pub.FunctionClass;
+import pub.ToolsforCMD;
 
 /**
  *
@@ -22,8 +23,10 @@ public class BedProcessConsole {
                 System.out.println("Intersect 2 BED file\r\n\t\tCMD : java -jar dataAnalysisTools.jar -bed -mode intersect in1.bed in2.bed out.bed");
                 
             }  else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("uniq")){
+                System.out.println(ToolsforCMD.startruningSTR());
                 new uniqueBed(args[3], args[4]);
             }else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("intersect")){
+                System.out.println(ToolsforCMD.startruningSTR());
                 new GetIntersectBed(args[3], args[4],args[5]);
             }
      }

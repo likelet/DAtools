@@ -6,6 +6,8 @@
 
 package pub;
 
+import java.text.NumberFormat;
+
 /**
  * <p>ToolsforCMD</p>
  * <p>Created on 2015-11-14 13:10:03</p>
@@ -44,7 +46,25 @@ public class ToolsforCMD {
  public static String replaceSuffix(String a,String orinsuffix,String altersuffix){
      return a.replaceAll(orinsuffix+"$",altersuffix);
  }
+ 
+    public static String getmemoryUsedInfomation() {
+        Runtime runtime = Runtime.getRuntime();
+
+        NumberFormat format = NumberFormat.getInstance();
+
+        StringBuilder sb = new StringBuilder();
+        long maxMemory = runtime.maxMemory();
+        long allocatedMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+
+        sb.append("Free memory: " + format.format(freeMemory / (1024*1024)) + "M\r\n");
+        sb.append("Allocated memory: " + format.format(allocatedMemory / (1024*1024)) + "M\r\n");
+        sb.append("Max memory: " + format.format(maxMemory / (1024*1024)) + "M\r\n");
+        sb.append("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / (1024*1024)) + "M\r\n");
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
-        System.out.println(ToolsforCMD.startruningSTR());
+        System.out.println(ToolsforCMD.getmemoryUsedInfomation());
     }
 }
