@@ -57,12 +57,12 @@ public class Console {
         System.out.println();
         if (args.length == 0) {
             System.out.println(ToolsforCMD.ANSI_YELLOW+ToolsforCMD.getDAtoolstr()+ToolsforCMD.ANSI_RESET);
-            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java based Data Analysis tool, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
+            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java-based Data Analysis tool for biological data, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
 
-            System.out.println("please input args\n type java -jar dataAnalsisTools.jar -h for help\r\n");
+            System.out.println("Please input args\n type java -jar dataAnalsisTools.jar -h for help\r\n");
         } else if (args[0].endsWith("-h")) {
             System.out.println(ToolsforCMD.ANSI_YELLOW+ToolsforCMD.getDAtoolstr()+ToolsforCMD.ANSI_RESET);
-            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java based Data Analysis tool, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
+            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java-based Data Analysis tool for biological data, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
 
             System.out.println("Please input args\n Please refers to CMD：java -jar dataAnalsisTools.jar -h for help");
             ArrayList<String> functionlist=new ArrayList<String>();
