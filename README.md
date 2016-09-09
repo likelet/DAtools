@@ -1,2 +1,2 @@
 # DAtools
-DAtools is a tool kit gatherring common data analysis script, which was mainly used by myself. This project provided series of analysis function as well as pipeline applying for daily data analysis tasks.
+DAtools is a tool kit for gathering common data analysis scripts using java language, which was mainly developed and run myself. This project provided series of analysis function as well as pipeline applying for daily data analysis tasks.
