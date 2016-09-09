@@ -23,12 +23,12 @@ public class FastQprocessConsole {
 
     public FastQprocessConsole(String[] args) throws IOException {
          if (args.length == 1) {
-                System.out.println("Trim fastq by constant length :   \r\n\t\tCMD : java -jar dataAnalysisTools.jar -fastqP -mode trimedFastqFilter left right filterlength all.fq/gz passed.fq failed.fq\n");
-                System.out.println("Trim fastq by constant length in memory efficient mode (single end) :   \r\n\t\tCMD : java -jar dataAnalysisTools.jar -fastqP -mode EStrimedFastqFilter left right all.fq/gz out.fq\n");
-                System.out.println("Trim fastq by constant length in memory efficient mode (paired end) :   \r\n\t\tCMD : java -jar dataAnalysisTools.jar -fastqP -mode EPtrimedFastqFilter left right fastq1/gz fastq2/gz failed.fq\n");               
-                System.out.println("Trim fastq by constant length only for those longer than x :   \r\n\t\tCMD : java -jar dataAnalysisTools.jar -fastqP -mode trimedFastqFilterByminiLength right lengthcondation all.fq/gz passed.fq\r\n");
-                System.out.println("Trim fastq by constant length and retain constant reads :   \r\n\t\tCMD : java -jar dataAnalysisTools.jar -fastqP -mode trimZheng left constantlength all.fq/gz\r\n");
-                System.out.println("Trim fastq by constant length and retain constant reads :   \r\n\t\tCMD : java -jar dataAnalysisTools.jar -fastqP -mode retainLength left inputfastq/gz outfastq/gz\r\n");
+                System.out.println("Trim fastq by constant length :   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -fastqP -mode trimedFastqFilter left right filterlength all.fq/gz passed.fq failed.fq "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Trim fastq by constant length in memory efficient mode (single end) :   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -fastqP -mode EStrimedFastqFilter left right all.fq/gz out.fq "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Trim fastq by constant length in memory efficient mode (paired end) :   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -fastqP -mode EPtrimedFastqFilter left right fastq1/gz fastq2/gz failed.fq "+ToolsforCMD.ANSI_RESET+"\r\n");               
+                System.out.println("Trim fastq by constant length only for those longer than x :   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -fastqP -mode trimedFastqFilterByminiLength right lengthcondation all.fq/gz passed.fq "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Trim fastq by constant length and retain constant reads :   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -fastqP -mode trimZheng left constantlength all.fq/gz "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Trim fastq by constant length and retain constant reads :   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -fastqP -mode retainLength left inputfastq/gz outfastq/gz "+ToolsforCMD.ANSI_RESET+"\r\n");
             } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("trimedFastqFilter")) {
                 if (args.length == 9) {
                     // System.out.println();

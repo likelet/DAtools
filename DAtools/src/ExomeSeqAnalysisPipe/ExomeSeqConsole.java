@@ -21,6 +21,7 @@ import ExomeSeqAnalysisPipe.mafProcess.annovarOut2Maf.AnnoTab2MAF;
 import ExomeSeqAnalysisPipe.mafProcess.vepMAF2TCGAmaf.VepMAF2TCGAmafMain;
 import java.util.ArrayList;
 import pub.FunctionClass;
+import pub.ToolsforCMD;
 
 /**
  *
@@ -31,19 +32,19 @@ import pub.FunctionClass;
 public class ExomeSeqConsole {
     public ExomeSeqConsole(String[] args) throws IOException {
          if (args.length == 1) {
-                System.out.println("Statistic snp frequency in allsamples \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode snpfre dir outfile");
-                System.out.println("Statistic snp frequency in allsamples \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode snpEfffre dir outfile [suffix]");
-                System.out.println("Convert varscan result to ICGC format \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode varscanICGC vsfinputfile ssmpoutfile analysisid sampleid");
-                System.out.println("Run Crest extrat SCLIP pl parallel(require samtools & crest) \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode crestExtract bamfile crestExtractSclipPath genome threadnum");
-                System.out.println("Run Crest extrat SCLIP pl parallel(require samtools & crest) \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode crestSV tumorbamfile [germlinebamfile] genomepath genomebit crestSVpath coverfile hostname threadnum");
-                System.out.println("Run CNVnatorExtract parallel(require samtools & cvnator) \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode cnvnator bamfile threadnum");
-                System.out.println("Run CNVnator (require cvnator) \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode cnvnator2 bamfile ");
-                System.out.println("Process Annovar maf file\r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode annovarTab2maf infile outfile tumorname normalname ");
-                System.out.println("Process VEP maf file\r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode vep2tcgaMaf infile outfile");
-                System.out.println("Processing Contra Output\r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode contraGscore folderlist outfile ");
-                System.out.println("Processing Contra Output\r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode contraMatrix originfilr outmatrix ");
-                System.out.println("Processing Contra Output\r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode contraWindowbin pairedsampletable faifile outmatrix gscorefile ");
-                System.out.println("Summary the coverage of Exome-seq data \r\n\t\tCMD : java -jar dataAnalysisTools.jar -exome -mode cov regionfile outfile");
+                System.out.println("Statistic snp frequency in allsamples \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode snpfre dir outfile "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Statistic snp frequency in allsamples \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode snpEfffre dir outfile [suffix] "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Convert varscan result to ICGC format \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode varscanICGC vsfinputfile ssmpoutfile analysisid sampleid "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Run Crest extrat SCLIP pl parallel(require samtools & crest) \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode crestExtract bamfile crestExtractSclipPath genome threadnum "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Run Crest extrat SCLIP pl parallel(require samtools & crest) \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode crestSV tumorbamfile [germlinebamfile] genomepath genomebit crestSVpath coverfile hostname threadnum "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Run CNVnatorExtract parallel(require samtools & cvnator) \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode cnvnator bamfile threadnum "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Run CNVnator (require cvnator) \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode cnvnator2 bamfile  "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Process Annovar maf file\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode annovarTab2maf infile outfile tumorname normalname  "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Process VEP maf file\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode vep2tcgaMaf infile outfile "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Processing Contra Output\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode contraGscore folderlist outfile  "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Processing Contra Output\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode contraMatrix originfilr outmatrix  "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Processing Contra Output\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode contraWindowbin pairedsampletable faifile outmatrix gscorefile  "+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Summary the coverage of Exome-seq data \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode cov regionfile outfile "+ToolsforCMD.ANSI_RESET+"\r\n");
                
             } else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("snpfre")){
                 new SNPfrequencyInSamples(args[3], args[4]);
