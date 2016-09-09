@@ -95,7 +95,7 @@ public class Console {
 
             Collections.sort(functionlist);
             for (int i = 0; i < functionlist.size(); i++) {
-                System.out.println("========"+i+".\t"+functionlist.get(i));
+                System.out.println(ToolsforCMD.ANSI_RED+"========"+i+".\t"+ToolsforCMD.ANSI_RESET+functionlist.get(i));
             }
 
             System.out.println("Type -updateinfor to view update information");
