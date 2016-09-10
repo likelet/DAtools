@@ -8,7 +8,7 @@ DAtools is a command tool kit for gathering common data analysis scripts using j
 
 ***0.	BED Process :***<br/>
 		```	java -jar DAtools.jar -bed```<br/>
-***1.	Devided fastq into two file by length :***<br/>  
+***1.	Devided fastq into two file by length :***<br/>
 		```	java -jar DAtools.jar -devidedFastQbylength length all.fq out1.fq out2.fq```<br/>
 ***2.	Dose ComposationFunctions :***<br/>
 		```	java -jar DAtools.jar -dose```<br/>
