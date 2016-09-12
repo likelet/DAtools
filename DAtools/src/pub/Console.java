@@ -76,9 +76,6 @@ public class Console {
             functionlist.add("Generate a Ven plot by certain data input:   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -venplot"+ToolsforCMD.ANSI_RESET+
                         ToolsforCMD.ANSI_CYAN+" datafile maintext plotType"+ToolsforCMD.ANSI_RESET);
-            functionlist.add("Getovelap of two list with unique output:   \r\n\t\t"+
-                    ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -getoverlap"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" filelist1 filelist2 outputfile uniqueA uniqueB"+ToolsforCMD.ANSI_RESET);
             functionlist.add("Getovelap of two list:  \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -getoverlap"+ToolsforCMD.ANSI_RESET+
                         ToolsforCMD.ANSI_CYAN+" filelist1 filelist2 outputfile"+ToolsforCMD.ANSI_RESET);
@@ -140,6 +137,7 @@ public class Console {
         } else if (args[0].endsWith("-updateinfor")) {
             System.out.println("\r\nUpdate information\r\n");
              
+            
             System.out.println("\r\n2.7.2 unique bed function ");
             System.out.println("\r\n2.7.1 add sequence feature calculation ");
             System.out.println("\r\n2.7 Add dose composation analysis function ");
@@ -163,25 +161,6 @@ public class Console {
             
         } else if (args[0].endsWith("-fastqP")) {
            new FastQprocessConsole(args);
-        } else if (args[0].endsWith("-getoverlap")) {
-            if (args.length == 4) {
-                try {
-                    System.out.println(ToolsforCMD.startruningSTR());
-                    new GetOverlap(args[1], args[2]).print(args[3]);
-                } catch (IOException ex) {
-                    Logger.getLogger(Console.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else if (args.length == 6) {
-                try {
-                    System.out.println(ToolsforCMD.startruningSTR());
-                    new GetOverlap(args[1], args[2]).print(args[3], args[4], args[5]);
-                } catch (IOException ex) {
-                    Logger.getLogger(Console.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            } else {
-                System.out.println("args error!");
-            }
         } else if (args[0].endsWith("-venplot")) {
             if (args.length == 4) {
                 // System.out.println();
