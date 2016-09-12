@@ -51,13 +51,13 @@ public class Console {
         System.out.println();
         if (args.length == 0) {
             System.out.println(ToolsforCMD.ANSI_YELLOW+ToolsforCMD.getDAtoolstr()+ToolsforCMD.ANSI_RESET);
-            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java-based Data Analysis tool for biological data, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
+            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java-based Data Analysis tool for biological data process, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
 
             System.out.println("Please input args\n type "+
                     ToolsforCMD.ANSI_GREEN+"java -jar dataAnalsisTools.jar "+ToolsforCMD.ANSI_RESET+ToolsforCMD.ANSI_CYAN+"-h"+ToolsforCMD.ANSI_RESET+" for help\r\n");
         } else if (args[0].endsWith("-h")) {
             System.out.println(ToolsforCMD.ANSI_YELLOW+ToolsforCMD.getDAtoolstr()+ToolsforCMD.ANSI_RESET);
-            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java-based Data Analysis tool for biological data, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
+            System.out.println(ToolsforCMD.ANSI_YELLOW+"Java-based Data Analysis tool for biological data process, version "+version+ToolsforCMD.ANSI_RESET+"\r\n");
 
             System.out.println("Please input args\n Please refers to CMD：java -jar dataAnalsisTools.jar -h for help");
             ArrayList<String> functionlist=new ArrayList<String>();
@@ -76,15 +76,15 @@ public class Console {
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -convertFormat "+ToolsforCMD.ANSI_RESET);
             functionlist.add("Generate a Ven plot by certain data input:   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -venplot"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" datafile maintext plotType"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <datafile> <maintext> <plotType>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("Getovelap of two list:  \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -getoverlap"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" filelist1 filelist2 outputfile"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <filelist1> <filelist2> <outputfile>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("Kegg Analysis :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -kegg "+ToolsforCMD.ANSI_RESET);
             functionlist.add("Local GO mapping of gene list :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -gomap"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" obofile annotation nametype(1 for uniprotID(new);2 for geneSympol) genelistfile output"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <obofile> <annotation> <nametype(1 for uniprotID(new);2 for geneSympol)> <genelistfile> <output>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("Multi mapfile merged to matrix    \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -MM"+ToolsforCMD.ANSI_RESET+
                         ToolsforCMD.ANSI_CYAN+"  dir suffix outputfile  "+ToolsforCMD.ANSI_RESET);
@@ -94,28 +94,28 @@ public class Console {
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -Fasta   "+ToolsforCMD.ANSI_RESET);
             functionlist.add("Remove SUMO-FC adaptors :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -removeAdapter"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" fastafile adapter(TATA,CACA,GAGA) type(N/C)"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <fastafile> <adapter(TATA,CACA,GAGA)> <type(N/C)>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("RNAseq Differential Expression Analysis(M):   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -RNAseqDE -mode WR(orSC)"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" condition1 condition2 outputfile  "+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <condition1> <condition2> <outputfile>  "+ToolsforCMD.ANSI_RESET);
             functionlist.add("RNAseq Mappng/quantitifaction(M):   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -RNAseqpipe"+ToolsforCMD.ANSI_RESET+
                         ToolsforCMD.ANSI_CYAN+" <fastq1> <fastq2> <library> <gtf> "+ToolsforCMD.ANSI_RESET);
             functionlist.add("Seperate fastq File by index :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -sepFastq"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" fastaqfile indexmapfile"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <fastaqfile> <indexmapfile>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("SepfastaFilebyIndex :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -sepFastabyIndex"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" fastafile indexlist(TATA,CACA,GAGA)"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <fastafile> <indexlist(TATA,CACA,GAGA)>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("Shorter sequencename of genome seq to parse gtg files :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -genomenamecut"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" genome.fa out.fa "+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <genome.fa> <out.fa> "+ToolsforCMD.ANSI_RESET);
             functionlist.add("Split the xml file generated by blast :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -BlastXMLsplit"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" fileinputxml seqnumber"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <fileinputxml> <seqnumber>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("Summary the unigenes distribution with trinites output(Decreased) :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -unigenedistribution"+ToolsforCMD.ANSI_RESET+
-                        ToolsforCMD.ANSI_CYAN+" isunigene trinity.fasta"+ToolsforCMD.ANSI_RESET);
+                        ToolsforCMD.ANSI_CYAN+" <isunigene> <trinity.fasta>"+ToolsforCMD.ANSI_RESET);
             functionlist.add("Processing Excel format :   \r\n\t\t"+
                     ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -excel "+ToolsforCMD.ANSI_RESET);
             functionlist.add("MetaGenome analysis :   \r\n\t\t"+
@@ -256,7 +256,7 @@ public class Console {
             new RNAseqConsole(args);
         } else if (args[0].endsWith("-RNAseqDE")) {
             if (args.length == 1) {
-                System.out.println("RNAseq Mappng/quantitifaction:   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -RNAseqDE -mode WR(orSC) condition1 condition2 outputfile\r\n"+ToolsforCMD.ANSI_RESET);
+                System.out.println("RNAseq Mappng/quantitifaction:   \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -RNAseqDE -mode WR(orSC) <condition1> <condition2> <outputfile>\r\n"+ToolsforCMD.ANSI_RESET);
                 System.out.println("Extra paramters  \r\n\t\t-mode\t WR(without replicates),SC(standard comparison) or MF(Multi factors)\r\n"+ToolsforCMD.ANSI_RESET);
                 System.out.println(" \r\n\t\t-fpkm\t calculate fpkm by supply a gene length file\r\n"+ToolsforCMD.ANSI_RESET);
             } else {
@@ -282,7 +282,7 @@ public class Console {
             new MatrixGenerateConsole(args);
         } else if (args[0].endsWith("-kegg")) {
             if (args.length == 1) {
-                System.out.println("Plot kegg blast result with mappfile\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -kegg -mode plotmap kegg.log geneExressionFile keggmapdir outmapdir [options]"+ToolsforCMD.ANSI_RESET);
+                System.out.println("Plot kegg blast result with mappfile\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -kegg -mode plotmap kegg.log <geneExressionFile> <keggmapdir> <outmapdir> [options]"+ToolsforCMD.ANSI_RESET);
                 
             } else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("plotmap")){
                 KeggPlotProcess dp=new KeggPlotProcess(args[3],args[4],args[5],args[6]);
@@ -290,9 +290,9 @@ public class Console {
             }
         }else if (args[0].endsWith("-excel")) {
             if (args.length == 1) {
-                System.out.println("Convert tab file into excel file \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -excel -mode tab2excel infile"+ToolsforCMD.ANSI_RESET);
-                System.out.println("Merge Excelfile in one \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -excel -mode merge inputdir outfile"+ToolsforCMD.ANSI_RESET);
-                System.out.println("Divid Excelfile into multiples\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -excel -mode split inputfile outdir"+ToolsforCMD.ANSI_RESET);
+                System.out.println("Convert tab file into excel file \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -excel -mode tab2excel <infile>"+ToolsforCMD.ANSI_RESET);
+                System.out.println("Merge Excelfile in one \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -excel -mode merge <inputdir> <outfile>"+ToolsforCMD.ANSI_RESET);
+                System.out.println("Divid Excelfile into multiples\r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -excel -mode <split> <inputfile> outdir>"+ToolsforCMD.ANSI_RESET);
             } else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("tab2excel")){
                 new tab2excel(args[3]).tab2excel();
               
@@ -305,8 +305,8 @@ public class Console {
             }
         }else if (args[0].endsWith("-meta")) {
             if (args.length == 1) {
-                System.out.println("Extract non human fastq items with blast output \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode ehuman inputFastqfile blastOutput outputfile"+ToolsforCMD.ANSI_RESET);
-                System.out.println("Remove overlap region in gtf \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode removeGTF inputGTFfile inputIntersectFile outfilename"+ToolsforCMD.ANSI_RESET);
+                System.out.println("Extract non human fastq items with blast output \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode ehuman <inputFastqfile> <blastOutput> <outputfile"+ToolsforCMD.ANSI_RESET);
+                System.out.println("Remove overlap region in gtf \r\n\t\t"+ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -exome -mode removeGTF <inputGTFfile> <inputIntersectFile> <outfilename>"+ToolsforCMD.ANSI_RESET);
                 
             } else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("ehuman")){
                 new GetNonHumanFastqFromBlastOut(args[3], args[4],args[5]);

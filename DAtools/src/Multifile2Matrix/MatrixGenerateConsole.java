@@ -28,12 +28,18 @@ public class MatrixGenerateConsole {
          if (args.length == 1) {
                 System.out.println("Merge multiple mapped file into a matrix:   \r\n\t\t"+
                         ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -MM -mode combineMatrix "+ToolsforCMD.ANSI_RESET+
-                            ToolsforCMD.ANSI_CYAN+"dir suffix outfile"+ToolsforCMD.ANSI_RESET+"\r\n");
+                            ToolsforCMD.ANSI_CYAN+"<dir> <suffix> <outfile>"+ToolsforCMD.ANSI_RESET+"\r\n");
+                System.out.println("Extra paramters for pipe  \r\n\t\t-col\t user defined col number for combination\r\n");
+           
          } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("combineMatrix")) {
                 if (args.length == 6) {
                     System.out.println(ToolsforCMD.startruningSTR());
-                    new Multifile2matrix(args[3],args[4],args[5]);
-                 } else {
+                   Multifile2matrix mm= new Multifile2matrix(args[3],args[4],args[5]);
+                    if (FunctionClass.getArgsParameter(args, "-col") != null) {
+                        mm.setColnumber(FunctionClass.getArgsParameter(args, "-col"));
+                        System.out.println(mm.getColnumber() + "of column number is applied for combining ");
+                    }
+                } else {
                     System.out.println("args error!");
                 }
             

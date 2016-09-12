@@ -43,7 +43,7 @@ public class Multifile2matrix {
     private HashMap<String, ArrayList<String>> filehashstr = new HashMap<String, ArrayList<String>>();
     ArrayList<HashMap<String, String>> multifilelist = new ArrayList<HashMap<String, String>>();
     private String fileout;
-    public int colnumber = 2;
+    private int colnumber = 2;
     private int listsize;
 
     public Multifile2matrix() {
@@ -52,8 +52,6 @@ public class Multifile2matrix {
     public Multifile2matrix(String dir, String suffix, String fileout) {
         filelist = FilelistReader.getFileArrayList(dir, suffix);
         this.fileout = fileout;
-        this.process();
-        this.writeout();
 
     }
 
@@ -293,6 +291,17 @@ public class Multifile2matrix {
 
     }
 
+    public void setColnumber(String colnumber) {
+        this.colnumber = Integer.parseInt(colnumber);
+    }
+
+    public int getColnumber() {
+        return colnumber;
+    }
+
+    
+    
+    
     public static void main(String[] args) {
         new Multifile2matrix("E:\\javatest", "_htseq.txt", "E:\\javatest\\result");
     }
