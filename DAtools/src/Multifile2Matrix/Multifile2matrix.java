@@ -1,13 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * merge multiple ID files into matrix file 
+It requred location of ID line at first column.
+By default, each "value" attributive should be at the second column in each file, users can also specified the column number of value attr.
+
  */
 package Multifile2Matrix;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pub.FilelistReader;
 
 /**
@@ -27,7 +38,11 @@ public class Multifile2matrix {
 
     private HashSet<String> allIterm = new HashSet<String>();
     private HashMap<String, HashMap> filehash = new HashMap<String, HashMap>();
+
+    private ArrayList<String> filelist;
     private HashMap<String, ArrayList<String>> filehashstr = new HashMap<String, ArrayList<String>>();
+    ArrayList<HashMap<String, String>> multifilelist = new ArrayList<HashMap<String, String>>();
+    private String fileout;
     private int colnumber = 2;
     private int listsize;
 
@@ -35,8 +50,9 @@ public class Multifile2matrix {
     }
 
     public Multifile2matrix(String dir, String suffix, String fileout) {
-        this.initialize(dir, suffix);
-        this.process(fileout);
+        filelist = FilelistReader.getFileArrayList(dir, suffix);
+        this.fileout = fileout;
+
     }
 
     public Multifile2matrix(String dir, String suffix, String fileout, int colnumber) {
@@ -45,7 +61,102 @@ public class Multifile2matrix {
         this.processJustmerge(fileout);
     }
 
-    
+    public void process() {
+
+        for (int i = 0; i < filelist.size(); i++) {
+            multifilelist.add(getSinglefilemap(new File(filelist.get(i))));
+        }
+
+        //countmap 
+        for (Iterator it = allIterm.iterator(); it.hasNext();) {
+            String tempstr = (String) it.next();
+            ArrayList<String> tempset = new ArrayList<String>();
+            for (int i = 0; i < multifilelist.size(); i++) {
+                if (multifilelist.get(i).get(tempstr) != null) {
+                    tempset.add(multifilelist.get(i).get(tempstr));
+                } else {
+                    tempset.add("NA");
+                }
+            }
+            filehashstr.put(tempstr, tempset);
+
+        }
+    }
+
+    //write out into matrix file
+    public void writeout() {
+        FileWriter fw;
+        try {
+            fw = new FileWriter(new File(fileout));
+
+            fw.append("ID\t");
+            for (Iterator it = filelist.iterator(); it.hasNext();) {
+                String tempstr = (String) it.next();
+                fw.append(tempstr + "\t");
+            }
+            fw.append("\r\n");
+            for (Iterator it1 = allIterm.iterator(); it1.hasNext();) {
+                String rowstr = (String) it1.next();
+
+                String tempstr2 = rowstr;
+                for (int i = 0; i < filehashstr.get(rowstr).size(); i++) {
+                    tempstr2 = tempstr2 + "\t" + filehashstr.get(rowstr).get(i);
+                }
+                fw.append(tempstr2 + "\r\n");
+            }
+            fw.flush();
+            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Multifile2matrix.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //write out into matrix file in excell format
+    public void writeoutExel() throws FileNotFoundException, IOException {
+        //write out excel file
+        Workbook wb = new XSSFWorkbook();
+        //header style
+        CellStyle style = wb.createCellStyle();
+        style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
+        //Readcount sheet
+        Sheet sheet1 = wb.createSheet("Matrix ");
+        //Setting header
+        ArrayList<String> namelist = new ArrayList<String>();
+        namelist.add("ID");
+        for (int i = 0; i < filelist.size(); i++) {
+            namelist.add(filelist.get(i));
+        }
+        Row row1 = sheet1.createRow((short) 0);
+        for (int i = 0; i < namelist.size(); i++) {
+            String colTitle = namelist.get(i);
+            Cell cell1 = row1.createCell(i);
+            cell1.setCellValue(colTitle);
+            cell1.setCellStyle(style);
+        }
+        //setting values
+        int rowIndex = 1;
+        for (Iterator it = filehashstr.keySet().iterator(); it.hasNext();) {
+            String str = (String) it.next();
+            Row row = sheet1.createRow(rowIndex);
+            ArrayList<String> countlist = filehashstr.get(str);
+//                Cell cell = row.createCell((short) 0);
+            row.createCell(0).setCellValue(str);
+            for (int i = 0; i < countlist.size(); i++) {
+                row.createCell(i + 1).setCellValue(countlist.get(i));
+            }
+            rowIndex++;
+        }
+
+        fileout = fileout + ".xlsx";
+        //Write Out
+        FileOutputStream fileOut = new FileOutputStream(fileout);
+        wb.write(fileOut);
+        fileOut.close();
+        System.out.println("Excel verson of output is generated and located in " + fileout);
+
+    }
 
     public void initialize(String dir, String suffix) {
         File[] filelist = FilelistReader.getFileList(dir, suffix);
@@ -58,7 +169,7 @@ public class Multifile2matrix {
             filehash.put(tempname, tempmap);
         }
     }
-    
+
     public void initializeSimple(String dir, String suffix) {
         File[] filelist = FilelistReader.getFileList(dir, suffix);
         for (int i = 0; i < filelist.length; i++) {
@@ -149,7 +260,7 @@ public class Multifile2matrix {
         } catch (IOException ex) {
             System.out.println("IO  test error");
         }
-        listsize=list.size();
+        listsize = list.size();
         return list;
     }
 
@@ -180,7 +291,18 @@ public class Multifile2matrix {
 
     }
 
+    public void setColnumber(String colnumber) {
+        this.colnumber = Integer.parseInt(colnumber);
+    }
+
+    public int getColnumber() {
+        return colnumber;
+    }
+
+    
+    
+    
     public static void main(String[] args) {
-        new Multifile2matrix("F:\\resouces\\projects\\SUMO-FC\\鞠静薇", "tagcount", "F:\\resouces\\projects\\SUMO-FC\\鞠静薇\\result.matrix");
+        new Multifile2matrix("E:\\javatest", "_htseq.txt", "E:\\javatest\\result");
     }
 }

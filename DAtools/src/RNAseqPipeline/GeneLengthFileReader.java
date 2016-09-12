@@ -66,7 +66,7 @@ public class GeneLengthFileReader {
         String[] str;
         while (br.ready()) {
             str = br.readLine().split("\t");
-            genelengthMap.put(str[0], Integer.parseInt(str[1]));
+            genelengthMap.put(str[0], Integer.parseInt(str[1].trim()));
         }
         br.close();
         return genelengthMap;
