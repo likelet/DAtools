@@ -25,7 +25,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pub.FilelistReader;
-import pub.Tools;
 
 /**
  *
@@ -37,13 +36,15 @@ public class getCountMatrixFromMap {
     private String suffix;
     public  String Dir = "./";
     private String outfile = "Result.xlsx";
+    public int thread = 2;
+    public int column=2;
 
     private ArrayList<String> filelist;
     ArrayList<HashMap<String, Integer>> countmaplist = new ArrayList<HashMap<String, Integer>>();
     ArrayList<HashMap<String, Double>> rpkmmaplist = new ArrayList<HashMap<String, Double>>();
     private HashSet<String> geneset = new HashSet<String>();
 
-    public int thread = 1;
+    
 
     public getCountMatrixFromMap(String lengthfile, String suffix, String outputfile) {
         try {
@@ -57,6 +58,7 @@ public class getCountMatrixFromMap {
 
     public void process() throws FileNotFoundException, IOException {
         filelist = FilelistReader.getFileArrayList(Dir, suffix);
+       
         HashMap<String, ArrayList<Integer>> readsCountMap = new HashMap();
         HashMap<String, ArrayList<Double>> rpkmMap = new HashMap();
 
@@ -86,6 +88,23 @@ public class getCountMatrixFromMap {
             // write out 
         } catch (InterruptedException ex) {
             Logger.getLogger(calculateRPKM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+//        for (int i = 0; i < filelist.size(); i++) {
+//            String file = filelist.get(i);
+//            computeRPKM cr = new computeRPKM(genelengthmap, file);
+//            HashMap<String, Integer> newcountmap = cr.getCountmap();
+//            
+//            HashMap<String, Double> newrpkmmap = cr.getRpkmtmap();
+//            countmaplist.add(newcountmap);
+//            rpkmmaplist.add(newrpkmmap);
+//        }
+
+        for (Iterator it = countmaplist.get(0).keySet().iterator(); it.hasNext();) {
+            String keystr = (String) it.next();
+            geneset.add(keystr);
         }
 
         //countmap 
@@ -136,7 +155,7 @@ public class getCountMatrixFromMap {
         int rowIndex = 1;
         for (Iterator it = readsCountMap.keySet().iterator(); it.hasNext();) {
             String gene = (String) it.next();
-            Row row = sheet1.createRow(filelist.size());
+            Row row = sheet1.createRow(rowIndex);
             ArrayList<Integer> countlist = readsCountMap.get(gene);
 //                Cell cell = row.createCell((short) 0);
             row.createCell(0).setCellValue(gene);
@@ -161,7 +180,7 @@ public class getCountMatrixFromMap {
         rowIndex = 1;
         for (Iterator it = rpkmMap.keySet().iterator(); it.hasNext();) {
             String gene = (String) it.next();
-            Row row = sheet1.createRow(filelist.size());
+            Row row = sheet2.createRow(rowIndex);
             ArrayList<Double> rpkmlist = rpkmMap.get(gene);
             row.createCell(0).setCellValue(gene);
             for (int i = 0; i < rpkmlist.size(); i++) {
@@ -182,10 +201,12 @@ public class getCountMatrixFromMap {
 
         private int startindex;
         private int endindex;
+
         public calculateRPKM(int startindex, int endindex) {
             this.startindex = startindex;
             this.endindex = endindex;
         }
+
         @Override
         public void run() {
 
@@ -212,9 +233,9 @@ public class getCountMatrixFromMap {
     }
 
     public static void main(String[] args) throws IOException {
-        getCountMatrixFromMap gmm = new getCountMatrixFromMap("C:\\game\\genelength.txt", "_htseq.txt", "C:\\game\\result");
-        gmm.Dir = "C:\\game";
+        getCountMatrixFromMap gmm = new getCountMatrixFromMap("E:\\javatest\\Homo_sapiens.GRCh37.75.gene.txt", "_htseq.txt", "E:\\javatest\\result");
+        gmm.Dir = "E:\\javatest";
         gmm.process();
     }
-    
+
 }

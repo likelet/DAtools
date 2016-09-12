@@ -34,79 +34,71 @@ import java.util.logging.Logger;
 public class computeRPKM {
 
     private HashMap<String, Integer> lengthmap;
-    private HashMap<String, Integer> countmap;
-    private HashMap<String, Double> rpkmtmap;
-    private HashMap<String,String> gene2chr;
-    private int totalreads=0;
+    private HashMap<String, Integer> countmap = new HashMap<String, Integer>();
+    private HashMap<String, Double> rpkmtmap = new HashMap<String, Double>();
+    private HashMap<String, String> gene2chr;
+    private int totalreads = 0;
     private String outfile;
-   
+
     //read file option
-    private int column=2;
-    private boolean isheader=true;
-    private String  sep="\t";
+    private int column = 2;
+    private boolean isheader = true;
+    private String sep = "\t";
 
     public computeRPKM() {
     }
 
-    
-    
-    
+    //gene length file using gtf as input 
     public computeRPKM(String genelengthfile, String genecountfile, String outfile) {
         GeneLengthFileReader gr = new GeneLengthFileReader(genelengthfile);
         lengthmap = gr.getGeneLengthMap2();
         this.outfile = outfile;
-        countmap = this.readCountFile(genecountfile);
+        readCountFile(genecountfile);
         this.process();
     }
-    
-    
+
     //for internal usage
-    
-      public computeRPKM(String gtffile, String genecountfile) {
-       gtf2lengthfile gf=new gtf2lengthfile( gtffile, outfile+".lengthfile");   
-//        this.totalreads = gf.getTotalreads();
+    public computeRPKM(String gtffile, String genecountfile) {
+        gtf2lengthfile gf = new gtf2lengthfile(gtffile, outfile + ".lengthfile");
         lengthmap = gf.getGeneLengthMap2();
         this.outfile = outfile;
-        countmap = this.readCountFile(genecountfile);
-        gene2chr=gf.getGene2chr();
+        readCountFile(genecountfile);
+        gene2chr = gf.getGene2chr();
         this.process();
-//        new File(outfile+".lengthfile").delete();
-        
     }
 
-public computeRPKM(HashMap<String,Integer> genelengthMap, String genecountfile) {
+    public computeRPKM(HashMap<String, Integer> genelengthMap, String genecountfile) {
 //        GeneLengthFileReader gr = new GeneLengthFileReader(genelengthfile);
         lengthmap = genelengthMap;
-        countmap = this.readCountFile(genecountfile);
-        this.processInternal();
+        readCountFile(genecountfile);
+        processInternal();
     }
+
     public void processInternal() {
-        
-            int count = 0;
-            int elength = 0;
-            System.out.println(totalreads);
-            for (Iterator it = countmap.keySet().iterator(); it.hasNext();) {
-                String tempstr = (String) it.next();
-                count = countmap.get(tempstr);
-                if (lengthmap.get(tempstr) != null) {
-                    elength = lengthmap.get(tempstr);
+
+        int count ;
+        int elength ;
+        System.out.println(totalreads);
+        for (Iterator it = countmap.keySet().iterator(); it.hasNext();) {
+            String tempstr = (String) it.next();
+            count = countmap.get(tempstr);
+            if (lengthmap.get(tempstr) != null) {
+                elength = lengthmap.get(tempstr);
 
 //                    System.out.println(this.getRPKM(count, elength));
-                    double rpkm=this.getRPKM(count, elength);
-                    this.rpkmtmap.put(tempstr, rpkm);
-                } else {
-                    this.rpkmtmap.put(tempstr, -1.0);
-                }
-
+                double rpkm = getRPKM(count, elength);
+                this.rpkmtmap.put(tempstr, rpkm);
+            } else {
+                this.rpkmtmap.put(tempstr, -1.0);
+                System.out.println("Length information of gene "+tempstr+" is unavailable");
             }
 
-         
-      
+        }
     }
 
-     public void process() {
+    public void process() {
         try {
-          
+
             FileWriter fw = new FileWriter(outfile);
             int count = 0;
             int elength = 0;
@@ -144,22 +136,20 @@ public computeRPKM(HashMap<String,Integer> genelengthMap, String genecountfile) 
         return rpkmtmap;
     }
 
-     
-     
-    public HashMap<String, Integer> readCountFile(String countfile) {
-        HashMap<String, Integer> rcmap = new HashMap<String, Integer>();
+    public void readCountFile(String countfile) {
+       
         BufferedReader br = null;
-        int count=0;
+        int count = 0;
         try {
             br = new BufferedReader(new FileReader(new File(countfile)));
             String[] str;
-            if(isheader){
+            if (isheader) {
                 br.readLine();
             }
             while (br.ready()) {
                 str = br.readLine().trim().split(sep);
-                rcmap.put(str[0], Integer.parseInt(str[column-1]));
-                this.totalreads += Integer.parseInt(str[column-1]);
+                countmap.put(str[0], Integer.parseInt(str[column - 1]));
+                this.totalreads += Integer.parseInt(str[column - 1]);
             }
             br.close();
         } catch (FileNotFoundException ex) {
@@ -167,20 +157,18 @@ public computeRPKM(HashMap<String,Integer> genelengthMap, String genecountfile) 
         } catch (IOException ex) {
             System.out.println("IO error");
         }
-        return rcmap;
     }
+
     private double getRPKM(int count, int length) {
-        return count *(10e6/totalreads)*(10e3/length);
+        return count * (10e6 / totalreads) * (10e3 / length);
     }
 
     public int getTotalreads() {
         return totalreads;
     }
-    
-    
-    
-    
-    class geneRPKM{
+
+    class geneRPKM {
+
         private String geneid;
         private String chr;
         private double rpkm;
@@ -217,13 +205,13 @@ public computeRPKM(HashMap<String,Integer> genelengthMap, String genecountfile) 
 
         @Override
         public String toString() {
-            return  geneid + "\t" + chr + "\r" + rpkm ;
+            return geneid + "\t" + chr + "\r" + rpkm;
         }
-        
-        
+
     }
-    
+
     public static void main(String[] args) {
+    
 //        new computeRPKM("F:\\百度云同步盘\\resouces\\projects\\splicing-进化\\gtf\\intersect_free.gtf","F:\\百度云同步盘\\resouces\\projects\\splicing-进化\\gtf\\SRR014262_25bp_free.count","F:\\百度云同步盘\\resouces\\projects\\splicing-进化\\gtf\\SRR014262_25bp_free.fpkm",false);
     }
 }

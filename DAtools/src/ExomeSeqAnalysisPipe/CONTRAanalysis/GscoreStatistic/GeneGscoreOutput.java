@@ -6,7 +6,7 @@
 package ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic;
 
 import java.util.ArrayList;
-import pub.myMath;
+import pub.MyMath;
 
 /**
  * <p>
@@ -64,7 +64,7 @@ public class GeneGscoreOutput {
     }
 
     public double getAMP_pvalue() {
-        return myMath.getPermutationPbyESset(permuteAmpList, ampscore);
+        return MyMath.getPermutationPbyESset(permuteAmpList, ampscore);
     }
 
     public void addAmplist(double permuteAmp){
@@ -92,7 +92,7 @@ public class GeneGscoreOutput {
     }
 
     public double getDEL_pvalue() {
-        return myMath.getPermutationPbyESset(permuteDelList, delscore);
+        return MyMath.getPermutationPbyESset(permuteDelList, delscore);
     }
 
     public void setDEL_pvalue(double DEL_pvalue) {

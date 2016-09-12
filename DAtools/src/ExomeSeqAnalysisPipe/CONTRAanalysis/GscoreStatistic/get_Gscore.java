@@ -6,7 +6,7 @@
 package ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic;
 
 import java.util.ArrayList;
-import pub.myMath;
+import pub.MyMath;
 
 /**
  * <p>
@@ -47,10 +47,10 @@ public class get_Gscore {
             }
         }
         if (amplist.size() > 0) {
-            ampscore = myMath.getArrayMean(amplist) * amplist.size() / datalist.size();
+            ampscore = MyMath.getArrayMean(amplist) * amplist.size() / datalist.size();
         }
         if (dellist.size() > 0) {
-            delscore = myMath.getArrayMean(dellist) * dellist.size() / datalist.size();
+            delscore = MyMath.getArrayMean(dellist) * dellist.size() / datalist.size();
         }
     }
 
