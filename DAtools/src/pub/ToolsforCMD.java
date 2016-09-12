@@ -31,32 +31,76 @@ public class ToolsforCMD {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-    
-    public static String print_ansi_BLACK(String str){
-        return ToolsforCMD.ANSI_BLACK+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_BLACK(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+            
+            return  str;
+        } else {
+            return ToolsforCMD.ANSI_BLACK + str + ToolsforCMD.ANSI_RESET;
+        }
     }
-    public static String print_ansi_RED(String str){
-        return ToolsforCMD.ANSI_RED+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_RED(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+              return  str;
+        } else {
+            return ToolsforCMD.ANSI_RED + str + ToolsforCMD.ANSI_RESET;
+        }
     }
-    public static String print_ansi_GREEN(String str){
-        return ToolsforCMD.ANSI_GREEN+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_GREEN(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+              return  str;
+        } else {
+            return ToolsforCMD.ANSI_GREEN + str + ToolsforCMD.ANSI_RESET;
+        }
+
     }
-    public static String print_ansi_YELLOW(String str){
-        return ToolsforCMD.ANSI_YELLOW+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_YELLOW(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+              return  str;
+        } else {
+            return ToolsforCMD.ANSI_YELLOW + str + ToolsforCMD.ANSI_RESET;
+        }
+
     }
-    public static String print_ansi_BLUE(String str){
-        return ToolsforCMD.ANSI_BLUE+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_BLUE(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+             return  str;
+        } else {
+            return ToolsforCMD.ANSI_BLUE + str + ToolsforCMD.ANSI_RESET;
+        }
+
     }
-    public static String print_ansi_PURPLE(String str){
-        return ToolsforCMD.ANSI_PURPLE+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_PURPLE(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+              return  str;
+        } else {
+            return ToolsforCMD.ANSI_PURPLE + str + ToolsforCMD.ANSI_RESET;
+        }
+
     }
-    public static String print_ansi_CYAN(String str){
-        return ToolsforCMD.ANSI_CYAN+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_CYAN(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+             return  str;
+        } else {
+            return ToolsforCMD.ANSI_CYAN + str + ToolsforCMD.ANSI_RESET;
+        }
     }
-    public static String print_ansi_WHITE(String str){
-        return ToolsforCMD.ANSI_WHITE+str+ToolsforCMD.ANSI_RESET;
+
+    public static String print_ansi_WHITE(String str) {
+        if (System.getProperty("os.name").contains("Windows")) {
+            return  str;
+        } else {
+            return ToolsforCMD.ANSI_WHITE + str + ToolsforCMD.ANSI_RESET;
+        }
     }
-    
+
     public static String getDAtoolstr() {
         String str = "==============================================================\n"
                 + "     ######     #                                      \n"
@@ -106,6 +150,7 @@ public class ToolsforCMD {
     }
 
     public static void main(String[] args) {
-        System.out.println(ToolsforCMD.getmemoryUsedInfomation());
+        System.out.println(ToolsforCMD.print_ansi_CYAN("Bb"));
+        System.out.println(System.getProperty("os.name"));
     }
 }

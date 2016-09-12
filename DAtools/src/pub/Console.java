@@ -45,13 +45,15 @@ public class Console {
     public static void main(String[] args) throws SpecialException, IOException, FileNotFoundException, ParserConfigurationException {
         long start = System.nanoTime();
         String version = "2.7.2";
-        System.out.println();
+//        System.out.println();
+        
         if (args.length == 0) {
+            
             System.out.println(ToolsforCMD.print_ansi_PURPLE(ToolsforCMD.getDAtoolstr()));
             System.out.println(ToolsforCMD.print_ansi_PURPLE("Java-based Data Analysis tool for biological data process, version " + version) + "\r\n");
 
             System.out.println("Please input args\n Type "
-                    + ToolsforCMD.print_ansi_GREEN("java -jar dataAnalsisTools.jar ")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar ")
                     + ToolsforCMD.print_ansi_CYAN("-h")
                     + " for help\r\n");
         } else if (args[0].endsWith("-h")) {
@@ -127,7 +129,9 @@ public class Console {
 
             Collections.sort(functionlist);
             for (int i = 0; i < functionlist.size(); i++) {
+                
                 System.out.println(ToolsforCMD.print_ansi_RED("========" + i + ".\t\r\n") + functionlist.get(i));
+               
             }
 
             System.out.println("Type -updateinfor to view update information");
@@ -320,7 +324,13 @@ public class Console {
         } else {
             System.out.println("command error!");
         }
+        
+        
+        
         long end = System.nanoTime();
         System.out.println("Total running time is " + (end - start) * 10e-10 + "s");
+//        AnsiConsole.systemUninstall();
     }
+    
+    
 }
