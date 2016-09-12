@@ -1,4 +1,4 @@
-package DoseCompensation.ResultStatistic;
+package RNAseqPipeline.DoseCompensation.ResultStatistic;
 
 import java.io.IOException;
 import java.util.ArrayList;

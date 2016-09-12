@@ -31,7 +31,7 @@ public class Tools {
     public final static String AA = "ARNDCQEGHILKMFPSTWYVBZX*";
     public static HashMap<Character, Integer> aaMap = getAAMap();
     public static String CURRENT_FILE_PATH = getCurrentFilePath();
-    public static int thread=23;
+    public static int thread=java.lang.Thread.activeCount();
 
     public static HashMap<Character, Integer> getAAMap() {
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();

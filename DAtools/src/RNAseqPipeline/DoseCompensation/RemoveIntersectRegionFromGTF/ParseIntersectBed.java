@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package DoseCompensation.RemoveIntersectRegionFromGTF;
+package RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF;
 
 import java.io.BufferedReader;
 import java.io.File;

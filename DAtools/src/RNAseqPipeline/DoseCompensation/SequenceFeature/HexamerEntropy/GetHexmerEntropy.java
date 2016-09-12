@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DoseCompensation.SequenceFeature.HexamerEntropy;
+package RNAseqPipeline.DoseCompensation.SequenceFeature.HexamerEntropy;
 
 import MotifSearch_H.getKmer;
 import MotifSearch_H.kmerFre;

@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package DoseCompensation.SequenceFeature;
+package RNAseqPipeline.DoseCompensation.SequenceFeature;
 
-import DoseCompensation.SequenceFeature.GCcontent.GCContent;
-import DoseCompensation.SequenceFeature.HexamerEntropy.GetHexmerEntropy;
-import DoseCompensation.SequenceFeature.rRNAsimlarty.SimilartyTorRNA;
+import RNAseqPipeline.DoseCompensation.SequenceFeature.GCcontent.GCContent;
+import RNAseqPipeline.DoseCompensation.SequenceFeature.HexamerEntropy.GetHexmerEntropy;
+import RNAseqPipeline.DoseCompensation.SequenceFeature.rRNAsimlarty.SimilartyTorRNA;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;

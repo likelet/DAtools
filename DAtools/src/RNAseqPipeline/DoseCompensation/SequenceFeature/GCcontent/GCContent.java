@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DoseCompensation.SequenceFeature.GCcontent;
+package RNAseqPipeline.DoseCompensation.SequenceFeature.GCcontent;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import pub.Fasta;

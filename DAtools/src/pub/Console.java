@@ -6,12 +6,12 @@ package pub;
  */
 import BedProcess.BedProcessConsole;
 import BlastResultXMLsplit.BlastXMLsplit;
-import DoseCompensation.RemoveIntersectRegionFromGTF.RemoveIntersectProcess;
-import DoseCompensation.RemoveIntersectRegionFromGTF.computeRPKM;
-import DoseCompensation.RemoveIntersectRegionFromGTF.gtf2lengthfile;
-import DoseCompensation.ResultStatistic.StaticChrome;
-import DoseCompensation.ResultStatistic.StaticChromeByClass;
-import DoseCompensation.SequenceFeature.CombineAnalysis;
+import RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF.RemoveIntersectProcess;
+import RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF.computeRPKM;
+import RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF.gtf2lengthfile;
+import RNAseqPipeline.DoseCompensation.ResultStatistic.StaticChrome;
+import RNAseqPipeline.DoseCompensation.ResultStatistic.StaticChromeByClass;
+import RNAseqPipeline.DoseCompensation.SequenceFeature.CombineAnalysis;
 import DrawUnigeneDistribution.DrawDistributionPlot;
 import DrawUnigeneDistribution.TrinityProcess;
 import ExomeSeqAnalysisPipe.ExomeSeqConsole;

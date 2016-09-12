@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package DoseCompensation.ResultStatistic;
+package RNAseqPipeline.DoseCompensation.ResultStatistic;
 
 import java.io.File;
 import java.util.ArrayList;
