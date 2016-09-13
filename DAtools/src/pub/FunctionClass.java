@@ -47,6 +47,18 @@ public class FunctionClass {
         }
     } 
     
+    public static boolean isContainParameter(String[] args, String str){
+        boolean is=false;
+        for (int i = 0; i < args.length; i++) {
+            if(args[i].equalsIgnoreCase(str)){
+                is=true;
+                break;
+            }
+            
+        }
+        return is;
+    }
+    
     public static void main(String[] args) {
         String[] a= {"A","B"};
         System.out.println(FunctionClass.getArgsParameter(a, "A"));

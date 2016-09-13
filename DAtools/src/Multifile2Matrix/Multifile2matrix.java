@@ -184,7 +184,7 @@ public class Multifile2matrix {
 
     public HashMap<String, String> getSinglefilemap(File file) {
         HashMap<String, String> tempmap = new HashMap<String, String>();
-
+        System.out.println("Parsing " +file );
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(file));
@@ -302,7 +302,10 @@ public class Multifile2matrix {
     
     
     
-    public static void main(String[] args) {
-        new Multifile2matrix("E:\\javatest", "_htseq.txt", "E:\\javatest\\result");
+    public static void main(String[] args) throws IOException {
+       Multifile2matrix mm= new Multifile2matrix("E:\\javatest", "result", "E:\\javatest\\matrix");
+       mm.setColnumber("7");
+       mm.process();
+       mm.writeoutExel();
     }
 }

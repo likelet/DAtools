@@ -28,21 +28,29 @@ public class MatrixGenerateConsole {
         if (args.length == 1) {
             System.out.println("Merge multiple mapped file into a matrix:   \r\n\t\t"
                     + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -MM -mode combineMatrix " )
-                    + ToolsforCMD.print_ansi_CYAN( "<dir> <suffix> <outfile>" ) + "\r\n");
-            System.out.println("Extra paramters for pipe  \r\n\t\t-col\t user defined col number for combination\r\n");
-
+                    + ToolsforCMD.print_ansi_CYAN( "<dir> <suffix> <outfile> [options]" ) + "\r\n");
+            System.out.println(ToolsforCMD.print_ansi_WHITE("Extra paramters for options"));
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-col\t ")
+                    + ToolsforCMD.print_ansi_YELLOW("User defined col number for combination,DEFAULT 2\r\n"));
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-excel\t")
+                    + ToolsforCMD.print_ansi_YELLOW("Write out matrix table in excel format,DEFAULT closed\r\n"));
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("combineMatrix")) {
-            if (args.length == 6) {
+            if (args.length <=9) {
                 System.out.println(ToolsforCMD.startruningSTR());
                 Multifile2matrix mm = new Multifile2matrix(args[3], args[4], args[5]);
                 if (FunctionClass.getArgsParameter(args, "-col") != null) {
                     mm.setColnumber(FunctionClass.getArgsParameter(args, "-col"));
                     System.out.println(mm.getColnumber() + "of column number is applied for combining ");
                 }
+                 mm.process();
+                if (FunctionClass.isContainParameter(args, "-excel")) {
+                    mm.writeoutExel();
+                }
+                mm.writeout();
             } else {
                 System.out.println("args error!");
             }
-
+            
         } else {
             System.out.println("Please specified -mode parameters!");
         }
