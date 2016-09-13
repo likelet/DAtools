@@ -60,7 +60,7 @@ public class Console {
             System.out.println(ToolsforCMD.print_ansi_PURPLE(ToolsforCMD.getDAtoolstr()));
             System.out.println(ToolsforCMD.print_ansi_PURPLE("Java-based Data Analysis tool for biological data process, version " + version) + "\r\n");
 
-            System.out.println("Please input args\n Please refers to CMD：java -jar dataAnalsisTools.jar -h for help");
+            System.out.println("Please input args\n Please refers to CMD：java -jar DAtools.jar -h for help");
             ArrayList<String> functionlist = new ArrayList<String>();
             
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("Devided fastq into two file by length :   \r\n\t\t")
