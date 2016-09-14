@@ -61,14 +61,14 @@
 
 
 ##Designers:
-[Qi Zhao](zhaoqi3@mail2.sysu.edu.cn)<br/>
+Qi Zhao, zhaoqi3@mail2.sysu.edu.cn<br/>
 
 ## Developers:
-[Qi Zhao](zhaoqi3@mail2.sysu.edu.cn)<br/>
+Qi Zhao, zhaoqi3@mail2.sysu.edu.cn<br/>
 
 
 ## Maintainer:
-[Qi Zhao](zhaoqi3@mail2.sysu.edu.cn) <br/>
+Qi Zhao, zhaoqi3@mail2.sysu.edu.cn<br/>
 Please feel free contact me. <br/>
 
 ## Copyright
