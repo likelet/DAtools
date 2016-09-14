@@ -1,5 +1,5 @@
 # DAtools
-[DAtools]<https://likelet.github.io/DAtools/> is a command tool kit gathering common data analysis scripts coding in java language, which was mainly developed and used by myself. This project provided series of analysis functions as well as pipelines applying for daily data analysis tasks incuding NGSdata processing.
+[DAtools](https://likelet.github.io/DAtools/) is a command tool kit gathering common data analysis scripts coding in java language, which was mainly developed and used by myself. This project provided series of analysis functions as well as pipelines applying for daily data analysis tasks incuding NGSdata processing.
 
 ##Screen shoot of DAtools
 <img src="DAtools/image/screenshoot.png">
@@ -61,15 +61,15 @@
 
 
 ##Designers:
-Qi Zhao, zhaoqi3@mail2.sysu.edu.cn<br/>
+[Qi Zhao](zhaoqi3@mail2.sysu.edu.cn)<br/>
 
 ## Developers:
-Qi Zhao, zhaoqi3@mail2.sysu.edu.cn <br/>
+[Qi Zhao](zhaoqi3@mail2.sysu.edu.cn)<br/>
 
 
 ## Maintainer:
-Qi Zhao <br/>
-Please feel free contact us. <br/>
+[Qi Zhao](zhaoqi3@mail2.sysu.edu.cn) <br/>
+Please feel free contact me. <br/>
 
 ## Copyright
 
