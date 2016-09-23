@@ -9,6 +9,7 @@ package FastaProcess;
 import FastaProcess.DrawUnigeneDistribution.DrawDistributionPlot;
 import FastaProcess.DrawUnigeneDistribution.TrinityProcess;
 import FastaProcess.FastaStatic.getFastaLength;
+import FastaProcess.GetFastaByID.extractFastaByID;
 import java.io.IOException;
 import pub.FunctionClass;
 import pub.ToolsforCMD;
@@ -37,6 +38,9 @@ public class FastaProcessConsole {
                 System.out.println("Split Fasta file \r\n\t\t"+
                         ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -Fasta -mode split" + ToolsforCMD.ANSI_RESET+//mode
                             ToolsforCMD.ANSI_CYAN + " infile.fa"+ToolsforCMD.ANSI_RESET);
+                 System.out.println("Extract Fasta sequences from Big fastafile using IDlist \r\n\t\t" + 
+                        ToolsforCMD.ANSI_GREEN + "java -jar DAtools.jar -Fasta -mode extractbyID" + ToolsforCMD.ANSI_RESET+//mode
+                            ToolsforCMD.ANSI_CYAN + " fastafile IDfile Outputfile" + ToolsforCMD.ANSI_RESET);
             
                //extra parameters 
                 System.out.println("Extra paramters for plotlength/ConN");
@@ -65,6 +69,8 @@ public class FastaProcessConsole {
                 getFastaLength.getfastaLength(args[3], args[4]);
             }else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("split")){
                 new SplitFasta2multifile(args[3]);
+            }else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("extractbyID")){
+                new extractFastaByID(args[3],args[4],args[5]);
             }else{
                 System.out.println("Please specified -mode parameters!");
             }
