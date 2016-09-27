@@ -158,17 +158,7 @@ public class Multifile2matrix {
 
     }
 
-    public void initialize(String dir, String suffix) {
-        File[] filelist = FilelistReader.getFileList(dir, suffix);
-        for (int i = 0; i < filelist.length; i++) {
-            System.out.println(filelist[i].getName());
-        }
-        for (int i = 0; i < filelist.length; i++) {
-            HashMap<String, String> tempmap = this.getSinglefilemap(filelist[i]);
-            String tempname = filelist[i].getName();
-            filehash.put(tempname, tempmap);
-        }
-    }
+    
 
     public void initializeSimple(String dir, String suffix) {
         File[] filelist = FilelistReader.getFileList(dir, suffix);
@@ -207,37 +197,6 @@ public class Multifile2matrix {
         return tempmap;
     }
 
-    public void process(String fileout) {
-        try {
-            FileWriter fw = new FileWriter(fileout);
-            fw.append("ID\t");
-            for (Iterator it = filehash.keySet().iterator(); it.hasNext();) {
-                String tempstr = (String) it.next();
-                fw.append(tempstr + "\t");
-            }
-
-            fw.append("\r\n");
-            for (Iterator it1 = allIterm.iterator(); it1.hasNext();) {
-                String rowstr = (String) it1.next();
-                fw.append(rowstr + "\t");
-                for (Iterator it2 = filehash.keySet().iterator(); it2.hasNext();) {
-                    String filename = (String) it2.next();
-                    HashMap tempmap = filehash.get(filename);
-                    if (tempmap.get(rowstr) != null) {
-                        fw.append(tempmap.get(rowstr) + "\t");
-                    } else {
-                        fw.append("0\t");
-                    }
-                }
-                fw.append("\r\n");
-            }
-            fw.flush();
-            fw.close();
-        } catch (IOException ex) {
-            System.out.println("IO error");
-        }
-
-    }
 
     public ArrayList<String> getSinglefileString(File file) {
 //        HashMap<String, String> tempmap = new HashMap<String, String>();
@@ -291,12 +250,42 @@ public class Multifile2matrix {
 
     }
 
+    
+    
     public void setColnumber(String colnumber) {
         this.colnumber = Integer.parseInt(colnumber);
     }
 
     public int getColnumber() {
         return colnumber;
+    }
+
+    public HashSet<String> getAllIterm() {
+        return allIterm;
+    }
+
+    public HashMap<String, HashMap> getFilehash() {
+        return filehash;
+    }
+
+    public ArrayList<String> getFilelist() {
+        return filelist;
+    }
+
+    public HashMap<String, ArrayList<String>> getFilehashstr() {
+        return filehashstr;
+    }
+
+    public ArrayList<HashMap<String, String>> getMultifilelist() {
+        return multifilelist;
+    }
+
+    public String getFileout() {
+        return fileout;
+    }
+
+    public int getListsize() {
+        return listsize;
     }
 
     

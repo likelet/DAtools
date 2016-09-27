@@ -29,6 +29,11 @@ public class MatrixGenerateConsole {
             System.out.println("Merge multiple mapped file into a matrix:   \r\n\t\t"
                     + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -MM -mode combineMatrix " )
                     + ToolsforCMD.print_ansi_CYAN( "<dir> <suffix> <outfile> [options]" ) + "\r\n");
+            System.out.println("Merge multiple RSEM outputfile into matrix :   \r\n\t\t"
+                    + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -MM -mode RSEM " )
+                    + ToolsforCMD.print_ansi_CYAN( "<dir> <outfile> [options]" ) + "\r\n");
+            
+            
             System.out.println(ToolsforCMD.print_ansi_WHITE("Extra paramters for options"));
             System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-col\t ")
                     + ToolsforCMD.print_ansi_YELLOW("User defined col number for combination,DEFAULT 2\r\n"));
