@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,12 +23,13 @@ import java.util.logging.Logger;
  * @author Qi Zhao
  */
 public class ReadEnsembleMapfile {
-public static HashMap<String,String> getEnsembleMap(String filename){
+public static HashMap<String,String> getEnsembleMap(InputStreamReader in){
     BufferedReader br=null;
     HashMap<String,String> map=null;
     try {
          map=new HashMap<String,String> ();
-        br = new BufferedReader(new java.io.FileReader(new File(filename)));
+          
+        br = new BufferedReader(in);
         while (br.ready()) {
             String dataStr = br.readLine().trim();
             String[] strarr=dataStr.split("\t");
@@ -46,4 +48,9 @@ public static HashMap<String,String> getEnsembleMap(String filename){
     }
      return map;
 }
+    public static void main(String[] args) {
+//        ClassLoader classLoader = getClass.getClassLoader();
+//        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(classLoader.getResource("src\\Multifile2Matrix\\CombineRSEMmatrix\\ensembleGENEmapfile").getFile());
+//    
+    }
 }

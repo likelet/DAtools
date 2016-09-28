@@ -10,6 +10,7 @@ import Multifile2Matrix.Multifile2matrix;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,19 +27,37 @@ import java.util.logging.Logger;
  */
 public class CombineRSEMmatrix {
 
-    public CombineRSEMmatrix(String  dir, String  outfile) {
-        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap("ensembleGENEmapfile");
-        Multifile2matrix mm=new Multifile2matrix( dir,  "gene.result", outfile, 6);
-         ArrayList<String> filelist=mm.getFilelist();
-         HashSet<String> allIterm=mm.getAllIterm();
-         HashMap<String, ArrayList<String>> filehashstr =mm.getFilehashstr();
+    private String dir;
+    private String outfile;
+    private String col="6";
+
+    public CombineRSEMmatrix(String dir, String outfile) {
+        this.dir = dir;
+        this.outfile = outfile;
+    }
+
+    public void setCol(String col) {
+        this.col = col;
+    }
+   
+    
+    
+    public void process(){
+        
+         HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
+        Multifile2matrix mm=new Multifile2matrix( dir,  "genes.results", outfile);
+        mm.setColnumber("6");
+        mm.process();
+        ArrayList<String> filelist=mm.getFilelist();
+        HashSet<String> allIterm=mm.getAllIterm();
+        HashMap<String, ArrayList<String>> filehashstr =mm.getFilehashstr();
         
         
         FileWriter fw;
         try {
             fw = new FileWriter(new File(outfile));
 
-            fw.append("ID\t");
+            fw.append("ID\tGeneName\tGeneType\t");
             for (Iterator it = filelist.iterator(); it.hasNext();) {
                 String tempstr = (String) it.next();
                 fw.append(tempstr + "\t");
@@ -58,6 +77,7 @@ public class CombineRSEMmatrix {
         } catch (IOException ex) {
             Logger.getLogger(Multifile2matrix.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
    
 
