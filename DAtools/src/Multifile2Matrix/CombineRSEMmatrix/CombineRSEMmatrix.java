@@ -29,7 +29,7 @@ public class CombineRSEMmatrix {
 
     private String dir;
     private String outfile;
-    private String col="6";
+    private String col="7";
 
     public CombineRSEMmatrix(String dir, String outfile) {
         this.dir = dir;
@@ -44,9 +44,9 @@ public class CombineRSEMmatrix {
     
     public void process(){
         
-         HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
+        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
         Multifile2matrix mm=new Multifile2matrix( dir,  "genes.results", outfile);
-        mm.setColnumber("6");
+        mm.setColnumber(col);
         mm.process();
         ArrayList<String> filelist=mm.getFilelist();
         HashSet<String> allIterm=mm.getAllIterm();
