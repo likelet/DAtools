@@ -4,6 +4,7 @@ package pub;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import ArrayProcessFunction.ArrayAnalysisConsole;
 import BedProcess.BedProcessConsole;
 import BlastResultXMLsplit.BlastXMLsplit;
 import RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF.RemoveIntersectProcess;
@@ -126,7 +127,8 @@ public class Console {
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -dose"));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("BED Process :   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -bed"));
-
+            functionlist.add(ToolsforCMD.print_ansi_YELLOW("Array data process function :   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -array"));
             Collections.sort(functionlist);
             for (int i = 0; i < functionlist.size(); i++) {
                 
@@ -278,6 +280,8 @@ public class Console {
             new MatrixGenerateConsole(args);
         } else if (args[0].endsWith("-Fasta")) {
             new FastaProcessConsole(args);
+        } else if (args[0].endsWith("-array")) {
+            new ArrayAnalysisConsole(args);
         } else if (args[0].endsWith("-exome")) {
             new ExomeSeqConsole(args);
         } else if (args[0].endsWith("-convertFormat")) {

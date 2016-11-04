@@ -43,6 +43,17 @@ public class CollapseMainFunction {
         this.process();
         this.writeOut();  
     }
+    public CollapseMainFunction(String inputdatafile, String inputMapfile, String outfile,String collapseMethod) {
+        this.outfile = outfile;
+        this.collapseMethod=collapseMethod;
+        ReadDataMatrix rm=new ReadDataMatrix(inputdatafile);
+        headername=rm.getHeadername();
+        dataTableMap=rm.getDataTableMap();
+        Marker2ProbeMap=MarkerProbeMap.getMarkerProbeMap(inputMapfile);
+        
+        this.process();
+        this.writeOut();  
+    }
     public void process() {
         for (Iterator it = Marker2ProbeMap.keySet().iterator(); it.hasNext();) {
             String keystr = (String) it.next();
@@ -59,12 +70,15 @@ public class CollapseMainFunction {
             if (collapseMethod.equalsIgnoreCase("mean") && sublist.size() != 0) {
                 outlist.add(GetCollapseList.getMeanArraylist(sublist));
                 markernamelist.add(keystr);
+            }else if (collapseMethod.equalsIgnoreCase("max") && sublist.size() != 0) {
+              outlist.add(GetCollapseList.getMaxArraylist(sublist));
+                markernamelist.add(keystr);
             }
         }
         
     }
     public void writeOut(){
-        System.out.println("start writing out ");
+        System.out.println("Start writing out ");
         try {
             FileWriter fw = new FileWriter(outfile);
             fw.append(this.headername+"\r\n");
