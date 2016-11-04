@@ -28,6 +28,9 @@ public class RNAseqConsole {
 
     public RNAseqConsole(String[] args) throws IOException {
         if (args.length == 1) {
+            System.out.println("Counting reads at chromesome level:   \r\n\t\t"
+                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -RNAseq -mode countC" )
+                            + ToolsforCMD.print_ansi_CYAN( " <bamfile/samfile> <outfile> [strategy: (u)uniqueOnly,(r)RandomAssigned,(a)AllAssigned,(m)meanAssinged]" ) + "\r\n");//parameters
             System.out.println("Calculate RPKM using count & genelength file(single file):   \r\n\t\t"
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -RNAseq -mode cRPKM" )
                             + ToolsforCMD.print_ansi_CYAN( " <Genecountfile> <Genelenghfile> <outfile>" ) + "\r\n");//parameters
