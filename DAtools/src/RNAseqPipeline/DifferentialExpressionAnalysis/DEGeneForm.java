@@ -18,6 +18,8 @@ public class DEGeneForm {
     private double log2FC;
     private double pValue;
     private double FDR;
+    private String geneNameDetails;// for RSEM
+    private String genetype;//RSEM
 
     public DEGeneForm(String geneName, int sample1Counts, int sample2Counts, double sample1FPKM, double sample2FPKM, double log2FC) {
         this.geneName = geneName;
@@ -113,9 +115,31 @@ public class DEGeneForm {
         this.FDR = FDR;
     }
 
+    public String getGeneNameDetails() {
+        return geneNameDetails;
+    }
+
+    public void setGeneNameDetails(String geneNameDetails) {
+        this.geneNameDetails = geneNameDetails;
+    }
+
+    public String getGenetype() {
+        return genetype;
+    }
+
+    public void setGenetype(String genetype) {
+        this.genetype = genetype;
+    }
+
+    
+    
+    
     @Override
     public String toString() {
         return geneName + "\t" + sample1Counts + "\t" + sample2Counts + "\t" + sample1FPKM + "\t" + sample2FPKM + "\t" + log2FC + "\t" + pValue + "\t" + FDR ;
+    }
+    public String toString2() {
+        return geneName + "\t" + geneNameDetails + "\t" + genetype + "\t" + sample1Counts + "\t" + sample2Counts + "\t" + sample1FPKM + "\t" + sample2FPKM + "\t" + log2FC + "\t" + pValue + "\t" + FDR ;
     }
     
             

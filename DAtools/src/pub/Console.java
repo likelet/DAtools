@@ -260,19 +260,9 @@ public class Console {
             if (args.length == 1) {
                 System.out.println(ToolsforCMD.print_ansi_YELLOW("RNAseq Mappng/quantitifaction:   \r\n\t\t") + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -RNAseqDE -mode WR(orSC) <condition1> <condition2> <outputfile>\r\n"));
                 System.out.println("Extra paramters  \r\n\t\t-mode\t WR(without replicates),SC(standard comparison) or MF(Multi factors)\r\n");
-                System.out.println(" \r\n\t\t-fpkm\t calculate fpkm by supply a gene length file\r\n");
+//                System.out.println(" \r\n\t\t-fpkm\t calculate fpkm by supply a gene length file\r\n");
             } else {
-
-                DEGeneAnalysis deg = new DEGeneAnalysis();
-                if (FunctionClass.getArgsParameter(args, "-fpkm") != null) {
-                    //to be finished
-                    String lengthfile = FunctionClass.getArgsParameter(args, "-fpkm");
-                    deg.setGene2length(GeneLengthFileReader.getgeneLengthMap(lengthfile));
-
-                }
-                deg.getDEgenePvalue(args[3], args[4]);
-                deg.getOutputFile(args[5]);
-
+                DEGeneAnalysis deg = new DEGeneAnalysis(args[3], args[4],args[5]); 
             }
         } else if (args[0].endsWith("-MM")) {
             new MatrixGenerateConsole(args);
