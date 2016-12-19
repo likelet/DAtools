@@ -4,6 +4,7 @@ package pub;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import ArrayProcessFunction.ArrayAnalysisConsole;
 import BedProcess.BedProcessConsole;
 import BlastResultXMLsplit.BlastXMLsplit;
 import RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF.RemoveIntersectProcess;
@@ -88,8 +89,7 @@ public class Console {
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -gomap")
                     + ToolsforCMD.print_ansi_CYAN(" <obofile> <annotation> <nametype(1 for uniprotID(new);2 for geneSympol)> <genelistfile> <output>"));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("Multi mapfile merged to matrix    \r\n\t\t")
-                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -MM")
-                    + ToolsforCMD.print_ansi_CYAN("  <dir> <suffix> <outputfile>  "));
+                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -MM"));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("Procesing FastQ files :   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -fastqP"));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("Process Fastafile    \r\n\t\t")
@@ -126,7 +126,8 @@ public class Console {
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -dose"));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("BED Process :   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -bed"));
-
+            functionlist.add(ToolsforCMD.print_ansi_YELLOW("Array data process function :   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -array"));
             Collections.sort(functionlist);
             for (int i = 0; i < functionlist.size(); i++) {
                 
@@ -208,8 +209,6 @@ public class Console {
 
         } else if (args[0].endsWith("-gomap")) {
             if (args.length == 6) {
-                // System.out.println();
-                //-gomap obofile annotation nametype(1 for uniprotID(new);2 for geneSympol) genelistfile output\r\n");
                 System.out.println(ToolsforCMD.startruningSTR());
                 GOmapping gomap = new GOmapping(args[2], args[1], Integer.parseInt(args[3]));
 
@@ -221,9 +220,6 @@ public class Console {
 
         } else if (args[0].endsWith("-sepFastabyIndex")) {
             if (args.length == 3) {
-                // System.out.println();
-                //-gomap obofile annotation nametype(1 for uniprotID(new);2 for geneSympol) genelistfile output\r\n");
-                //String [] indexlib={"TATA","CACA","GAGA"};
                 String[] indexlib = args[2].split(",");
                 System.out.println(ToolsforCMD.startruningSTR());
                 new SeperateSequenceByIndex(args[1], indexlib);
@@ -234,9 +230,6 @@ public class Console {
 
         } else if (args[0].endsWith("-removeAdapter")) {
             if (args.length == 4) {
-                // System.out.println();
-                //-gomap obofile annotation nametype(1 for uniprotID(new);2 for geneSympol) genelistfile output\r\n");
-                //String [] indexlib={"TATA","CACA","GAGA"};
                 System.out.println(ToolsforCMD.startruningSTR());
                 new removeAdaper(args[1], args[2], args[3]);
 
@@ -268,6 +261,8 @@ public class Console {
             new MatrixGenerateConsole(args);
         } else if (args[0].endsWith("-Fasta")) {
             new FastaProcessConsole(args);
+        } else if (args[0].endsWith("-array")) {
+            new ArrayAnalysisConsole(args);
         } else if (args[0].endsWith("-exome")) {
             new ExomeSeqConsole(args);
         } else if (args[0].endsWith("-convertFormat")) {

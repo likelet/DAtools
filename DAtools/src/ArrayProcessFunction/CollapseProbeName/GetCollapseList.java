@@ -24,7 +24,7 @@ public class GetCollapseList {
         for (int i = 0; i < subDatalist.get(0).size(); i++) {
             int NAnumber = 0;
             for (int j = 0; j < subDatalist.size(); j++) {
-                if (subDatalist.get(j).get(i) != "NA") {
+                if (!"NA" .equals(subDatalist.get(j).get(i))) {
                     double elemets = Double.parseDouble(subDatalist.get(j).get(i));
                     if (elemets >= tempD) {
                         tempD = elemets;
