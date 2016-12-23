@@ -17,6 +17,7 @@ import FormatConvert.exceloperation.ExcelOperation;
 import FormatConvert.tab2excel;
 import GOannotation.GOmapping;
 import FastaProcess.GetFastaByID.extractFastaByID;
+import FormatConvert.ConvertFormatConsole;
 import KeggAnnotation.PlotKegg.KeggPlotProcess;
 import MetaGenomeAnalysis.RawdataQC.GetNonHumanFastqFromBlastOut;
 import Multifile2Matrix.MatrixGenerateConsole;
@@ -45,7 +46,7 @@ public class Console {
 
     public static void main(String[] args) throws SpecialException, IOException, FileNotFoundException, ParserConfigurationException {
         long start = System.nanoTime();
-        String version = "2.7.2";
+        String version = "2.7.3";
 //        System.out.println();
         
         if (args.length == 0) {
@@ -142,7 +143,7 @@ public class Console {
 
         } else if (args[0].endsWith("-updateinfor")) {
             System.out.println("\r\nUpdate information\r\n");
-
+            System.out.println("\r\n2.7.3 add varscan2anovar in converFormat function ");
             System.out.println("\r\n2.7.2 unique bed function ");
             System.out.println("\r\n2.7.1 add sequence feature calculation ");
             System.out.println("\r\n2.7 Add dose composation analysis function ");
@@ -266,7 +267,7 @@ public class Console {
         } else if (args[0].endsWith("-exome")) {
             new ExomeSeqConsole(args);
         } else if (args[0].endsWith("-convertFormat")) {
-            new MatrixGenerateConsole(args);
+            new ConvertFormatConsole(args);
         } else if (args[0].endsWith("-kegg")) {
             if (args.length == 1) {
                 System.out.println(ToolsforCMD.print_ansi_YELLOW("Plot kegg blast result with mappfile\r\n\t\t") + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -kegg -mode plotmap kegg.log <geneExressionFile> <keggmapdir> <outmapdir> [options]"));
