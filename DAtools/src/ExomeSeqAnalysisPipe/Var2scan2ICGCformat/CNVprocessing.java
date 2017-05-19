@@ -27,7 +27,7 @@ public class CNVprocessing {
         return isp;
     }
     public void processing(String vsfinputfile,String ssmpoutfile,String analysisid,String sampleid ){
-        ArrayList<VarscanCNVFormat> vsflist=ParseClass.ParseVarscanCNVFormat(vsfinputfile);
+        ArrayList<VarscanCNVFormat> vsflist=ParseVarscanClass.ParseVarscanCNVFormat(vsfinputfile);
         
         ArrayList<ICGCcnsmP> ssmplist=new ArrayList<ICGCcnsmP>();
         for (int i = 0; i < vsflist.size(); i++) {

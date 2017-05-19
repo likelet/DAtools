@@ -18,9 +18,9 @@ import java.util.Comparator;
  * @version 
  */
 //按照降序根据FC排列
-public class SetdataCompare implements Comparator<SetdataTerm> {
+public class SetdataCompare implements Comparator<GeneDataTerm> {
 
-    public int compare(SetdataTerm o1, SetdataTerm o2) {
+    public int compare(GeneDataTerm o1, GeneDataTerm o2) {
         if (o1.getFoldChange() < o2.getFoldChange()) {
             return -1;
         } else if (o1.getFoldChange() > o2.getFoldChange()) {

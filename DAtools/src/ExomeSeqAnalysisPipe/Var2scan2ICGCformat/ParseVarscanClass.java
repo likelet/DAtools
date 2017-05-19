@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @date 2015-7-29 17:03:29
  * @version 1.6.0
  */
-public class ParseClass {
+public class ParseVarscanClass {
 
     public static ArrayList<VarscanSomaticFormat> ParseVarscanSomaticFormat(String varscanSomaticfile) {
         ArrayList<VarscanSomaticFormat> templist = new ArrayList<VarscanSomaticFormat>();

@@ -8,6 +8,7 @@ package FastaProcess;
 
 import FastaProcess.DrawUnigeneDistribution.DrawDistributionPlot;
 import FastaProcess.DrawUnigeneDistribution.TrinityProcess;
+import FastaProcess.FastaDemuplex.fastqDemultiplex;
 import FastaProcess.FastaStatic.getFastaLength;
 import FastaProcess.GetFastaByID.extractFastaByID;
 import java.io.IOException;
@@ -38,6 +39,9 @@ public class FastaProcessConsole {
                 System.out.println("Split Fasta file \r\n\t\t"+
                         ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -Fasta -mode split" + ToolsforCMD.ANSI_RESET+//mode
                             ToolsforCMD.ANSI_CYAN + " infile.fa"+ToolsforCMD.ANSI_RESET);
+                System.out.println("demultiplex Fasta file \r\n\t\t"+
+                        ToolsforCMD.ANSI_GREEN+"java -jar DAtools.jar -Fasta -mode deplex" + ToolsforCMD.ANSI_RESET+//mode
+                            ToolsforCMD.ANSI_CYAN + " infile.fa"+ToolsforCMD.ANSI_RESET+ ToolsforCMD.ANSI_CYAN + " indexSample.txt"+ToolsforCMD.ANSI_RESET);
                  System.out.println("Extract Fasta sequences from Big fastafile using IDlist \r\n\t\t" + 
                         ToolsforCMD.ANSI_GREEN + "java -jar DAtools.jar -Fasta -mode extractbyID" + ToolsforCMD.ANSI_RESET+//mode
                             ToolsforCMD.ANSI_CYAN + " fastafile IDfile Outputfile" + ToolsforCMD.ANSI_RESET);
@@ -71,6 +75,8 @@ public class FastaProcessConsole {
                 new SplitFasta2multifile(args[3]);
             }else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("extractbyID")){
                 new extractFastaByID(args[3],args[4],args[5]);
+            }else if(FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("deplex")){
+                new fastqDemultiplex(args[3],args[4]);
             }else{
                 System.out.println("Please specified -mode parameters!");
             }

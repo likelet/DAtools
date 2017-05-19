@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 
-package ExomeSeqAnalysisPipe.ConvertDataFormat;
+package ExomeSeqAnalysisPipe.SNPfilter.FilterVarscanOut;
 
 /**
  *
  * @author Administrator
- * @since 2016-12-23
- * @coding time 10:43:16
+ * @since 2017-5-9
+ * @coding time 13:41:35
  * @author Qi Zhao
  */
-public class VarscanOutput2AnnovarTable {
-   
+public class FilterSomaticSNVaroundCNV_or_TargetRegion_edge {
+
 }

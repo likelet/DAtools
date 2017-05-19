@@ -7,7 +7,7 @@
 package Algorithm.ssGSEA;
 
 /**
- * <p>SetdataTerm</p>
+ * <p>GeneDataTerm</p>
  * <p>Created on 2015-10-17 11:03:08</p>
  * <p>Author Email: zhaoqi3@mail2.sysu.edu.cn</p>
  * @author ZHAO Qi
@@ -15,13 +15,16 @@ package Algorithm.ssGSEA;
  * @version java 1.6.0
  * @version 
  */
-public class SetdataTerm {
+public class GeneDataTerm {
     
     private String GeneName;
     private double FoldChange;
     private int Rank;
+    private boolean ishit;
+    private double value;
+    private double ESscore;
 
-    public SetdataTerm(String GeneName, double FoldChange) {
+    public GeneDataTerm(String GeneName, double FoldChange) {
         this.GeneName = GeneName;
         this.FoldChange = FoldChange;
     }
@@ -82,6 +85,30 @@ public class SetdataTerm {
      */
     public void setGeneName(String GeneName) {
         this.GeneName = GeneName;
+    }
+
+    public boolean isIshit() {
+        return ishit;
+    }
+
+    public void setIshit(boolean ishit) {
+        this.ishit = ishit;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public double getESscore() {
+        return ESscore;
+    }
+
+    public void setESscore(double ESscore) {
+        this.ESscore = ESscore;
     }
 
 

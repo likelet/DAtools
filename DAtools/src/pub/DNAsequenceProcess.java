@@ -39,7 +39,22 @@ public class DNAsequenceProcess {
     }
     return tempstr;
 }
-    
+    public static char getChargefBase(char c){
+         HashMap<Character,Character> temomap=new HashMap<Character,Character> ();
+         
+         temomap.put('A', 'T');
+        temomap.put('T', 'A');
+        temomap.put('C', 'G');
+        temomap.put('G', 'C');  
+        temomap.put('N', 'N'); 
+        temomap.put('a', 't');
+        temomap.put('t', 'a');
+        temomap.put('c', 'g');
+        temomap.put('g', 'c'); 
+        
+        return temomap.get(c);
+        
+    }
     public static void main(String[] args) {
         System.out.println(new DNAsequenceProcess().getReverseComplimentary("GAGACACCTCGGTTCTATCGATTGATCAACAAGTTTGTACAAAAAAGCAGGCT"));
         System.out.println(new DNAsequenceProcess().getReverseComplimentary("GAGACGGGGATCAACCACTTTGTACAAGAAAGCTGGGT"));

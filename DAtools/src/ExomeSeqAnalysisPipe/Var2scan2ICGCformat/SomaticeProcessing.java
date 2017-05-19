@@ -43,7 +43,7 @@ public class SomaticeProcessing {
         return isp;
     }
     public void processing(String vsfinputfile,String ssmpoutfile,String analysisid,String sampleid ){
-        ArrayList<VarscanSomaticFormat> vsflist=ParseClass.ParseVarscanSomaticFormat(vsfinputfile);
+        ArrayList<VarscanSomaticFormat> vsflist=ParseVarscanClass.ParseVarscanSomaticFormat(vsfinputfile);
         
         ArrayList<ICGCssmP> ssmplist=new ArrayList<ICGCssmP>();
         for (int i = 0; i < vsflist.size(); i++) {
