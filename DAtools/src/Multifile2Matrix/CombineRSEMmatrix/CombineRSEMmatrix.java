@@ -30,6 +30,7 @@ public class CombineRSEMmatrix {
     private String dir;
     private String outfile;
     private String col="7";
+    public boolean isgencode=false;
 
     public CombineRSEMmatrix(String dir, String outfile) {
         this.dir = dir;
@@ -44,7 +45,12 @@ public class CombineRSEMmatrix {
     
     public void process(){
         
-        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
+        HashMap<String,String> ensemblemap= null;
+        if(isgencode){
+            ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodeGENEmapfile")));
+        }else {
+            ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
+        }
         Multifile2matrix mm=new Multifile2matrix( dir,  "genes.results", outfile);
         mm.setColnumber(col);
         mm.process();

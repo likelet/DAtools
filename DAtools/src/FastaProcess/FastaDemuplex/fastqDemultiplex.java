@@ -59,18 +59,21 @@ public class fastqDemultiplex {
             index1 = indexlist.get(i).getIndex1();
             index2=indexlist.get(i).getIndex2();
             temppath = "."+ File.separator  +filename+"_"+ indexlist.get(i).getSamplename() + ".fasta";
+            System.out.println(temppath);
             FileWriter fw = new FileWriter(temppath);
+            String index1rev=dp.getReverseComplimentary(index1);
+            String index2rev=dp.getReverseComplimentary(index2);
             for (int j = 0; j < fastalist.size(); j++) {
                 fa=fastalist.get(j);
                  String str=fa.getSequence();
-                if(str.startsWith(index1)&&str.endsWith(index2)){
+                if(str.startsWith(index1)&&str.endsWith(index2rev)){
                     //trim fasta left && right adaptor
                    
                   fa.setSequence(str.substring(index1.length()-1,str.length()-index2.length()-1 ));
                    fw.append(fa.toString()+"\r\n");
                    fastalist.remove(i);
                    j=j--;
-                }else if(str.startsWith(dp.getReverseComplimentary(index2))&&str.endsWith(dp.getReverseComplimentary(index2))){
+                }else if(str.startsWith(index2)&&str.endsWith(dp.getReverseComplimentary(index2))){
                     fa.setSequence(str.substring(index2.length()-1,str.length()-index1.length()-1 ));
                    fw.append(fa.toString()+"\r\n");
                    fastalist.remove(i);
