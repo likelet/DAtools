@@ -40,10 +40,16 @@ public class MatrixGenerateConsole {
                     + ToolsforCMD.print_ansi_YELLOW("User defined col number for combination,DEFAULT 2\r\n"));
             System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-excel\t")
                     + ToolsforCMD.print_ansi_YELLOW("Write out matrix table in excel format,DEFAULT closed\r\n"));
-            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-count\t ")
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-count\t")
                     + ToolsforCMD.print_ansi_YELLOW("Merged readscount matrix (RSEM mode only),DEFAUL closed\r\n"));
-            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-gencode\t ")
-                    + ToolsforCMD.print_ansi_YELLOW("using gencode annotation (RSEM mode only),DEFAUL ensemble \r\n"));
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-isform\t")
+                    + ToolsforCMD.print_ansi_YELLOW("Merged readscount matrix (RSEM mode only) from isform level,DEFAUL closed\r\n"));
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-tpm\t")
+                    + ToolsforCMD.print_ansi_YELLOW("Merged TPM matrix (RSEM mode only),DEFAUL closed\r\n")); 
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-gencode\t")
+                    + ToolsforCMD.print_ansi_YELLOW("Using gencode annotation (RSEM mode only),DEFAUL ensemble was used \r\n"));
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-annofile\t ")
+                    + ToolsforCMD.print_ansi_YELLOW("User defined annofile,DEFAULT 2\r\n"));
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("combineMatrix")) {
             if (args.length <=9) {
                 System.out.println(ToolsforCMD.startruningSTR());
@@ -62,22 +68,34 @@ public class MatrixGenerateConsole {
             }
             
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("RSEM")) {
-            if (args.length <=9) {
+            
                 System.out.println(ToolsforCMD.startruningSTR());
                 CombineRSEMmatrix cc=new CombineRSEMmatrix(args[3],args[4]);
+                 if (FunctionClass.isContainParameter(args, "-isform")) {
+                    cc.setIsIsformlevel(true);
+                    System.out.println(ToolsforCMD.print_ansi_YELLOW("Read isform files "));
+                }
                  if (FunctionClass.isContainParameter(args, "-count")) {
                     cc.setCol("5");
                     System.out.println("Combine readscount column of RSEM output ");
-                }else if (FunctionClass.isContainParameter(args, "-gencode")) {
-                    cc.isgencode=true;
-                    System.out.println("Combine readscount column of RSEM output ");
-                } else {
-                     System.out.println("Combine RPKM column of RSEM output");
-                 }
+                }
+                 if (FunctionClass.isContainParameter(args, "-tpm")) {
+                    cc.setCol("6");
+                    System.out.println("Combine tpm feature column of RSEM output ");
+                }
+                 if (FunctionClass.isContainParameter(args, "-gencode")) {
+                    cc.setIsgencode(true);
+                    System.out.println("Using genecode annotation of parsing RSEM output ");
+                } 
+                 if (FunctionClass.isContainParameter(args, "-annofile")) {
+                    cc.setTranscriptMappingfile(FunctionClass.getArgsParameter(args, "-annofile"));
+                    System.out.println("Using selfdefined annotation of parsing RSEM output ");
+                } 
+                 if (FunctionClass.isContainParameter(args, "-excel")) {
+                     System.out.println(ToolsforCMD.print_ansi_YELLOW("-excel option for RSEM output matrix was not implemented yet"));
+                }
                  cc.process();
-            } else {
-                System.out.println("args error!");
-            }
+           
             
         } else {
             System.out.println("Please specified -mode parameters!");

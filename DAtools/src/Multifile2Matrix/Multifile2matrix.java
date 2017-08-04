@@ -45,6 +45,7 @@ public class Multifile2matrix {
     private String fileout;
     private int colnumber = 2;
     private int listsize;
+    private boolean skipfirstline=false;
 
     public Multifile2matrix() {
     }
@@ -61,6 +62,12 @@ public class Multifile2matrix {
         this.processJustmerge(fileout);
     }
 
+    public void setSkipfirstline(boolean skipfirstline) {
+        this.skipfirstline = skipfirstline;
+    }
+
+    
+    
     public void process() {
 
         for (int i = 0; i < filelist.size(); i++) {
@@ -178,6 +185,9 @@ public class Multifile2matrix {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(file));
+            if(this.skipfirstline){
+                br.readLine();
+            }
             while (br.ready()) {
                 String[] str = br.readLine().split("\t");
 //                System.out.println(str.length);

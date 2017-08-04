@@ -8,6 +8,8 @@ package Multifile2Matrix.CombineRSEMmatrix;
 
 import Multifile2Matrix.Multifile2matrix;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,30 +31,65 @@ public class CombineRSEMmatrix {
 
     private String dir;
     private String outfile;
-    private String col="7";
-    public boolean isgencode=false;
+    private String col="7";//for fpkm , 2 for reads count , 6 for tpm
+    private boolean isgencode=false;
+    private boolean isIsformlevel=false;
+    private String transcriptMappingfile;
+    
+    private String suffix=".genes.results";
 
     public CombineRSEMmatrix(String dir, String outfile) {
         this.dir = dir;
         this.outfile = outfile;
     }
 
+    public CombineRSEMmatrix(String dir, String outfile, String transcriptMappingfile) {
+        this.dir = dir;
+        this.outfile = outfile;
+        this.transcriptMappingfile = transcriptMappingfile;
+    }
+
+    public void setTranscriptMappingfile(String transcriptMappingfile) {
+        this.transcriptMappingfile = transcriptMappingfile;
+    }
+
+    
+    
+    public void setIsgencode(boolean isgencode) {
+        this.isgencode = isgencode;
+    }
+
+    public void setIsIsformlevel(boolean isIsformlevel) {
+        this.isIsformlevel = isIsformlevel;
+    }
+    
+    
+    
     public void setCol(String col) {
         this.col = col;
     }
    
     
     
-    public void process(){
+    public void process() throws FileNotFoundException{
         
         HashMap<String,String> ensemblemap= null;
-        if(isgencode){
-            ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodeGENEmapfile")));
-        }else {
+        if(transcriptMappingfile!=null){
+            ensemblemap= ReadEnsembleMapfile.getEnsembleMapWithTranscriptID(new InputStreamReader(new FileInputStream(new File(transcriptMappingfile))));
+        }else{
             ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
         }
-        Multifile2matrix mm=new Multifile2matrix( dir,  "genes.results", outfile);
+       
+            
+        System.out.println(ensemblemap.size());
+        Multifile2matrix mm=null;
+        if(isIsformlevel){
+            suffix=".isoforms.results";
+        }
+        
+        mm=new Multifile2matrix( dir,  this.suffix, outfile);
         mm.setColnumber(col);
+        mm.setSkipfirstline(true);
         mm.process();
         ArrayList<String> filelist=mm.getFilelist();
         HashSet<String> allIterm=mm.getAllIterm();
@@ -62,13 +99,18 @@ public class CombineRSEMmatrix {
         FileWriter fw;
         try {
             fw = new FileWriter(new File(outfile));
-
-            fw.append("ID\tGeneName\tGeneType\t");
+            if(this.isIsformlevel){
+               fw.append("ID\tTranscriptName\tGeneName\tGeneType\tStrand\t"); 
+            }else{
+                fw.append("ID\tGeneName\tGeneType\t");
+            }
+            String headerstr="";
             for (Iterator it = filelist.iterator(); it.hasNext();) {
                 String tempstr = (String) it.next();
-                fw.append(tempstr + "\t");
+               headerstr+=new File(tempstr).getName().replaceAll(suffix, "") + "\t";
             }
-            fw.append("\r\n");
+            headerstr=headerstr.substring(0,headerstr.length()-1);
+            fw.append(headerstr+"\r\n");
             for (Iterator it1 = allIterm.iterator(); it1.hasNext();) {
                 String rowstr = (String) it1.next();
 
@@ -86,5 +128,9 @@ public class CombineRSEMmatrix {
         
     }
    
-
+    public static void main(String[] args) throws FileNotFoundException {
+       CombineRSEMmatrix cc=new CombineRSEMmatrix("E:\\javatest","E:\\javatest\\result.matrix"); 
+           cc.isgencode=true;
+       cc.process();
+    }
 }

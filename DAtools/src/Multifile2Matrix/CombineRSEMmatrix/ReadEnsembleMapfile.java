@@ -32,6 +32,32 @@ public static HashMap<String,String> getEnsembleMap(InputStreamReader in){
         while (br.ready()) {
             String dataStr = br.readLine().trim();
             String[] strarr=dataStr.split("\t");
+            map.put(strarr[1], dataStr);
+        }  
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(ReadEnsembleMapfile.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+        Logger.getLogger(ReadEnsembleMapfile.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        try {
+            br.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ReadEnsembleMapfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     return map;
+}
+
+public static HashMap<String,String> getEnsembleMapWithTranscriptID(InputStreamReader in){
+    BufferedReader br=null;
+    HashMap<String,String> map=null;
+    try {
+         map=new HashMap<String,String> ();
+          
+        br = new BufferedReader(in);
+        while (br.ready()) {
+            String dataStr = br.readLine().trim();
+            String[] strarr=dataStr.split("\t");
             map.put(strarr[0], dataStr);
         }  
     } catch (FileNotFoundException ex) {
@@ -50,6 +76,6 @@ public static HashMap<String,String> getEnsembleMap(InputStreamReader in){
     public static void main(String[] args) {
 //        ClassLoader classLoader = getClass.getClassLoader();
 //        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(classLoader.getResource("src\\Multifile2Matrix\\CombineRSEMmatrix\\ensembleGENEmapfile").getFile());
-//    
+    
     }
 }
