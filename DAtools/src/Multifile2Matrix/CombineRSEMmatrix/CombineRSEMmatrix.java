@@ -72,12 +72,17 @@ public class CombineRSEMmatrix {
     
     
     public void process() throws FileNotFoundException{
-        
-        HashMap<String,String> ensemblemap= null;
-        if(transcriptMappingfile!=null){
-            ensemblemap= ReadEnsembleMapfile.getEnsembleMapWithTranscriptID(new InputStreamReader(new FileInputStream(new File(transcriptMappingfile))));
-        }else{
-            ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
+
+        HashMap<String, String> ensemblemap = null;
+        if (isIsformlevel && transcriptMappingfile != null) {
+            ensemblemap = ReadEnsembleMapfile.getEnsembleMapWithTranscriptID(new InputStreamReader(new FileInputStream(new File(transcriptMappingfile))));
+        } else if (isgencode && isIsformlevel) {
+            ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream(transcriptMappingfile)));
+        } else if (isgencode) {
+            ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodeGENEmapfile")));
+        } else {
+            ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
+
         }
        
             
@@ -113,7 +118,7 @@ public class CombineRSEMmatrix {
             fw.append(headerstr+"\r\n");
             for (Iterator it1 = allIterm.iterator(); it1.hasNext();) {
                 String rowstr = (String) it1.next();
-
+//                rowstr=rowstr.split("||.")[0];
                 String tempstr2 = ensemblemap.get(rowstr);
                 for (int i = 0; i < filehashstr.get(rowstr).size(); i++) {
                     tempstr2 = tempstr2 + "\t" + filehashstr.get(rowstr).get(i);
@@ -132,5 +137,6 @@ public class CombineRSEMmatrix {
        CombineRSEMmatrix cc=new CombineRSEMmatrix("E:\\javatest","E:\\javatest\\result.matrix"); 
            cc.isgencode=true;
        cc.process();
+//System.out.println("a.b".split("||.")[0]);
     }
 }
