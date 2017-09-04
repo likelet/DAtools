@@ -46,7 +46,7 @@ public class Console {
 
     public static void main(String[] args) throws SpecialException, IOException, FileNotFoundException, ParserConfigurationException {
         long start = System.nanoTime();
-        String version = "2.7.3";
+        String version = "2.7.4";
 //        System.out.println();
         
         if (args.length == 0) {

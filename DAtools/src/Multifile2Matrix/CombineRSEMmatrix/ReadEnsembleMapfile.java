@@ -32,7 +32,7 @@ public static HashMap<String,String> getEnsembleMap(InputStreamReader in){
         while (br.ready()) {
             String dataStr = br.readLine().trim();
             String[] strarr=dataStr.split("\t");
-            map.put(strarr[1], dataStr);
+            map.put(strarr[0], dataStr);
         }  
     } catch (FileNotFoundException ex) {
         Logger.getLogger(ReadEnsembleMapfile.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,7 +75,7 @@ public static HashMap<String,String> getEnsembleMapWithTranscriptID(InputStreamR
 }
     public static void main(String[] args) {
 //        ClassLoader classLoader = getClass.getClassLoader();
-//        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(classLoader.getResource("src\\Multifile2Matrix\\CombineRSEMmatrix\\ensembleGENEmapfile").getFile());
+//        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(this.getClass().getResource("src\\Multifile2Matrix\\CombineRSEMmatrix\\ensembleGENEmapfile").getFile());
     
     }
 }
