@@ -35,6 +35,7 @@ public class CombineRSEMmatrix {
     private boolean isgencode=false;
     private boolean isIsformlevel=false;
     private String transcriptMappingfile;
+    private String refvesion="hg38";
     
     private String suffix=".genes.results";
 
@@ -51,6 +52,10 @@ public class CombineRSEMmatrix {
 
     public void setTranscriptMappingfile(String transcriptMappingfile) {
         this.transcriptMappingfile = transcriptMappingfile;
+    }
+
+    public void setRefvesion(String refvesion) {
+        this.refvesion = refvesion;
     }
 
     
@@ -74,6 +79,10 @@ public class CombineRSEMmatrix {
     public void process() throws FileNotFoundException{
 
         HashMap<String, String> ensemblemap = null;
+        
+        if(this.refvesion.endsWith("hg19")){
+                 ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodehg19mapfile")));
+        }else{
         if (isIsformlevel && transcriptMappingfile != null) {
             ensemblemap = ReadEnsembleMapfile.getEnsembleMapWithTranscriptID(new InputStreamReader(new FileInputStream(new File(transcriptMappingfile))));
         } else if (isgencode && isIsformlevel) {
@@ -84,7 +93,7 @@ public class CombineRSEMmatrix {
             ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
 
         }
-       
+        }
             
         System.out.println(ensemblemap.size());
         Multifile2matrix mm=null;

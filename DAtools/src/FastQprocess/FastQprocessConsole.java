@@ -42,7 +42,7 @@ public class FastQprocessConsole {
             if (args.length == 9) {
                 // System.out.println();
                 System.out.println(ToolsforCMD.startruningSTR());
-                new FastQprocess(args[6]).trimFastq(Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]), args[6], args[7]);
+                new FastQprocess(args[6]).trimFastq(Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]), args[7], args[8]);
             } else if ((args.length == 7)) {
                 System.out.println(ToolsforCMD.startruningSTR());
                 new FastQprocess(args[6]).trimFastq(Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]), "passed.fq", "failed.fq");
