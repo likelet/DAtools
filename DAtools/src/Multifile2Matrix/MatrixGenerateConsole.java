@@ -79,6 +79,7 @@ public class MatrixGenerateConsole {
                 }
                  if (FunctionClass.isContainParameter(args, "-count")) {
                     cc.setCol("5");
+                    cc.isCount=true;
                     System.out.println("Combine readscount column of RSEM output ");
                 }
                  if (FunctionClass.isContainParameter(args, "-tpm")) {

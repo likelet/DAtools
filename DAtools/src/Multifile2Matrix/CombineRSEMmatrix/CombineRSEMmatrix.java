@@ -35,6 +35,7 @@ public class CombineRSEMmatrix {
     private boolean isgencode=false;
     private boolean isIsformlevel=false;
     private String transcriptMappingfile;
+    public  boolean isCount=false;
     private String refvesion="hg38";
     
     private String suffix=".genes.results";
@@ -124,15 +125,22 @@ public class CombineRSEMmatrix {
                headerstr+=new File(tempstr).getName().replaceAll(suffix, "") + "\t";
             }
             headerstr=headerstr.substring(0,headerstr.length()-1);
-            fw.append(headerstr+"\r\n");
+            fw.append(headerstr+"\n");
             for (Iterator it1 = allIterm.iterator(); it1.hasNext();) {
                 String rowstr = (String) it1.next();
 //                rowstr=rowstr.split("||.")[0];
                 String tempstr2 = ensemblemap.get(rowstr);
-                for (int i = 0; i < filehashstr.get(rowstr).size(); i++) {
-                    tempstr2 = tempstr2 + "\t" + filehashstr.get(rowstr).get(i);
+                //get count or tpm
+                if(this.isCount){
+                    for (int i = 0; i < filehashstr.get(rowstr).size(); i++) {
+                        tempstr2 = tempstr2 + "\t" + Math.rint(Double.parseDouble(filehashstr.get(rowstr).get(i)));
+                    }
+                }else{
+                    for (int i = 0; i < filehashstr.get(rowstr).size(); i++) {
+                        tempstr2 = tempstr2 + "\t" + filehashstr.get(rowstr).get(i);
+                    }
                 }
-                fw.append(tempstr2 + "\r\n");
+                fw.append(tempstr2 + "\n");
             }
             fw.flush();
             fw.close();

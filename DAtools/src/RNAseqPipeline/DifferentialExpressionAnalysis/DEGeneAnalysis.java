@@ -43,7 +43,7 @@ public class DEGeneAnalysis {
     private String filename2 = "Sample2";
     private ArrayList<Double> plist=new ArrayList<Double>();
     public String type="rsem";
-    private HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
+    private HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodeGENEmapfile")));
         
 
     public DEGeneAnalysis() {
