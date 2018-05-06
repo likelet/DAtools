@@ -257,6 +257,8 @@ public class Console {
 //                System.out.println(" \r\n\t\t-fpkm\t calculate fpkm by supply a gene length file\r\n");
             } else {
                 DEGeneAnalysis deg = new DEGeneAnalysis(args[3], args[4],args[5]); 
+                deg.getDEgenePvalue();
+                deg.getOutputFile();
             }
         } else if (args[0].endsWith("-MM")) {
             new MatrixGenerateConsole(args);

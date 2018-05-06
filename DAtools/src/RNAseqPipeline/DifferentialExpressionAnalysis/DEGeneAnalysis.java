@@ -37,12 +37,15 @@ public class DEGeneAnalysis {
     private double N;
     private int lib1;
     private int lib2;
+    private String countFile1;
+    private String countFile2;
+    private String outputFile;
     private ArrayList<DEGeneForm> countList;
     private HashMap<String, Integer> gene2length;
     private String filename1 = "Sample1";
     private String filename2 = "Sample2";
     private ArrayList<Double> plist=new ArrayList<Double>();
-    public String type="rsem";
+    public String type="com";
     private HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodeGENEmapfile")));
         
 
@@ -53,19 +56,22 @@ public class DEGeneAnalysis {
         if (countFile1.endsWith("genes.results")) {
             System.out.println(ToolsforCMD.print_ansi_CYAN("Parsing your file as RSEM output format, press ctrl+z if not expected "));
             type="rsem";
-        } else {
-            System.out.println(ToolsforCMD.print_ansi_CYAN("Parsing your file as HTseq output format, press ctrl+z if not expected "));
-            type="htseq";
-        }
-        this.getDEgenePvalue(countFile1, countFile2,type);
-        this.getOutputFile(outputFile);
+        } 
+        this.countFile1=countFile1;
+        this.countFile2=countFile2;
+        this.outputFile=outputFile;
+        
+//        this.getDEgenePvalue(countFile1, countFile2,type);
+//        this.getOutputFile(outputFile);
     }
 
-    public void getDEgenePvalue(String countFile1, String countFile2, String type) throws FileNotFoundException, IOException {
+    public void getDEgenePvalue() throws FileNotFoundException, IOException {
         if (type.equals("rsem")) {
             countList = countListRSEM(countFile1, countFile2);
-        }else{
-        countList = countListHTseq(countFile1, countFile2);
+        }else if (type.equals("htseq")) {
+            countList = countListRSEM(countFile1, countFile2);
+        }else if (type.equals("com")){
+        countList = countListCommon(countFile1, countFile2);
         }
 
         //table header name defination
@@ -204,7 +210,7 @@ public class DEGeneAnalysis {
                 sample1 = sample1 + sample1Count;
                 int sample2Count = Integer.parseInt(dataArr2[1]);
                 sample2 = sample2 + sample2Count;
-                countList.add(new DEGeneForm(geneName, sample1Count, sample2Count, 0, 0, 0));
+                countList.add(new DEGeneForm(geneName, sample1Count, sample2Count, 0, 1, 1));
             }
             this.lib1 = sample1;
             this.lib2 = sample2;
@@ -215,6 +221,35 @@ public class DEGeneAnalysis {
                 lib2 = lib2 - countList.get(length - i).getSample2Counts();
                 countList.remove(countList.size() - 1);
             }
+            N = (double) lib2 / lib1;
+        } catch (IOException ex) {
+            System.out.println("IO error, pleas check your file");
+        }
+        return countList;
+    }
+    private ArrayList<DEGeneForm> countListCommon(String countFile1, String countFile2) throws FileNotFoundException {
+
+        ArrayList<DEGeneForm> countList = new ArrayList();
+        try {
+            BufferedReader br1 = new BufferedReader(new java.io.FileReader(countFile1));
+            BufferedReader br2 = new BufferedReader(new java.io.FileReader(countFile2));
+            double sample1 = 0.0;
+            double sample2 = 0.0;
+            while (br1.ready()) {
+                String data1 = br1.readLine();
+                String[] dataArr1 = data1.split("\t");
+                String geneName = dataArr1[0];
+                String data2 = br2.readLine();
+                String[] dataArr2 = data2.split("\t");
+                double sample1Count = Double.parseDouble(dataArr1[1]);
+                sample1 = sample1 + sample1Count;
+                double sample2Count =  Double.parseDouble(dataArr2[1]);
+                sample2 = sample2 + sample2Count;
+                countList.add(new DEGeneForm(geneName, (int) Math.round(sample1Count), (int) Math.round(sample2Count), 0, 1, 1));
+            }
+            this.lib1 = (int) Math.round(sample1);
+            this.lib2 = (int) Math.round(sample2);
+            int length = countList.size() - 1;
             N = (double) lib2 / lib1;
         } catch (IOException ex) {
             System.out.println("IO error, pleas check your file");
@@ -261,7 +296,7 @@ private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2
         this.gene2length = gene2length;
     }
 
-    public void getOutputFile(String outputFile) {
+    public void getOutputFile() {
         System.out.println(ToolsforCMD.print_ansi_CYAN("Writing Out ..."));
         try {
             FileWriter fw = new FileWriter(outputFile);
