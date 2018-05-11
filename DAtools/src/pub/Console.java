@@ -143,6 +143,7 @@ public class Console {
 
         } else if (args[0].endsWith("-updateinfor")) {
             System.out.println("\r\nUpdate information\r\n");
+            System.out.println("\r\n2.7.4 add exome-seq analysis tools 4: GATKcombineVariant_To_AnnovarDB");
             System.out.println("\r\n2.7.3 add varscan2anovar in converFormat function ");
             System.out.println("\r\n2.7.2 unique bed function ");
             System.out.println("\r\n2.7.1 add sequence feature calculation ");

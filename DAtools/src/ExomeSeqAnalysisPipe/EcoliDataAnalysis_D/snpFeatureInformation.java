@@ -8,7 +8,7 @@
  *non antibio| x3  |  x4 
  **************************
  */
-package ExomeSeqAnalysisPipe.EcoliDataAnalysis;
+package ExomeSeqAnalysisPipe.EcoliDataAnalysis_D;
 
 import java.util.ArrayList;
 import java.util.HashMap;

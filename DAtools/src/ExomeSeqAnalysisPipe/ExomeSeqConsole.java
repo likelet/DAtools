@@ -11,6 +11,7 @@ import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.GetStatic_fromPermuta
 import ExomeSeqAnalysisPipe.CONTRAanalysis.summaryContra.summaryContraResult;
 import ExomeSeqAnalysisPipe.CONTRAanalysis.summaryContra.summaryContraResultWithChromeBind;
 import ExomeSeqAnalysisPipe.CoverageGenerate.CoverageForExomeSeq;
+import ExomeSeqAnalysisPipe.GATKresultParse.FormatTransfer;
 import java.io.IOException;
 import ExomeSeqAnalysisPipe.RunCrest.RunCrestExtractSclipFinal;
 import ExomeSeqAnalysisPipe.RunCrest.RunCrestSVfinal;
@@ -50,6 +51,8 @@ public class ExomeSeqConsole {
                     + ToolsforCMD.print_ansi_CYAN( " bamfile  " ) + "\r\n");
             System.out.println("Process Annovar maf file\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode annovarTab2maf" )
                     + ToolsforCMD.print_ansi_CYAN( " infile outfile tumorname normalname  " ) + "\r\n");
+            System.out.println("Process GATKcombineVariant file to annovar DB\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode gatk2annodb" )
+                    + ToolsforCMD.print_ansi_CYAN( " input.vcf output.txt" ) + "\r\n");
             System.out.println("Process VEP maf file\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode vep2tcgaMaf" )
                     + ToolsforCMD.print_ansi_CYAN( " infile outfile " ) + "\r\n");
             System.out.println("Process gvc 2 maf file\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode gvc2tcgaMaf" )
@@ -158,7 +161,14 @@ public class ExomeSeqConsole {
                 System.out.println("arguments error, please check your parameters");
             }
 
-        } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("cov")) {
+        } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("gatk2annodb")) {
+            if (args.length == 5) {
+                System.out.println(ToolsforCMD.startruningSTR());
+                FormatTransfer.GATKcombineVariant_To_AnnovarDB(args[3], args[4]);
+            } else {
+                System.out.println("arguments error, please check your parameters");
+            }
+        }else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("cov")) {
             if (args.length == 5) {
                 System.out.println(ToolsforCMD.startruningSTR());
                 new CoverageForExomeSeq(args[3], args[4]);

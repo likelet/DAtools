@@ -2,7 +2,7 @@
  * Two matrix file ;
  */
 
-package ExomeSeqAnalysisPipe.EcoliDataAnalysis;
+package ExomeSeqAnalysisPipe.EcoliDataAnalysis_D;
 
 import java.io.BufferedReader;
 import java.io.File;
