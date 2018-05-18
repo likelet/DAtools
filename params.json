@@ -1,6 +1,0 @@
-{
-  "name": "DAtools",
-  "tagline": "Java based data analysis command tools for biological data processing",
-  "body": "# DAtools\r\nDAtools is a tool kit gatherring common data analysis script, which was mainly used by myself. This project provided series of analysis function as well as pipeline applying for daily data analysis tasks.\r\n",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
