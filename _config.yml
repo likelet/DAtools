@@ -1,0 +1,8 @@
+title: DAtools
+description: Java based data analysis command tools for biological data processing
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-slate
+
+gems:
+  - jekyll-mentions
