@@ -35,7 +35,9 @@ public class BEDReader {
                 BED bd ;
                 if(dataStr.length==5){
                     bd = new BED(dataStr[0], Integer.parseInt(dataStr[1]), Integer.parseInt(dataStr[2]), dataStr[3], dataStr[4]);
-                }else{
+                }else if(dataStr.length==4){
+                    bd = new BED(dataStr[0], Integer.parseInt(dataStr[1]), Integer.parseInt(dataStr[2]),dataStr[3]);
+                }else {
                     bd = new BED(dataStr[0], Integer.parseInt(dataStr[1]), Integer.parseInt(dataStr[2]));
                 }
                 bedlist.add(bd);

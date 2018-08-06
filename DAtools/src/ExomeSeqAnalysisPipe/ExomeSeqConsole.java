@@ -4,12 +4,12 @@
  */
 package ExomeSeqAnalysisPipe;
 
-import ExomeSeqAnalysisPipe.CNVnator.RunCNVnatorFinal;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.GetStatic_fromContraOutput;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.GetStatic_fromPermutationList;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.summaryContra.summaryContraResult;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.summaryContra.summaryContraResultWithChromeBind;
+import ExomeSeqAnalysisPipe.CNVanalysis.CNVnator.RunCNVnatorFinal;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic.GetStatic_fromContraOutput;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic.GetStatic_fromPermutationList;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.summaryContra.summaryContraResult;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.summaryContra.summaryContraResultWithChromeBind;
 import ExomeSeqAnalysisPipe.CoverageGenerate.CoverageForExomeSeq;
 import ExomeSeqAnalysisPipe.GATKresultParse.FormatTransfer;
 import java.io.IOException;

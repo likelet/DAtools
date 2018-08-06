@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package ExomeSeqAnalysisPipe.CONTRAanalysis;
+package ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis;
 
-import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.GetStatic_fromPermutationList;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.summaryContra.summaryContraResultWithChromeBind;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic.GetStatic_fromPermutationList;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.summaryContra.summaryContraResultWithChromeBind;
 import java.util.ArrayList;
 
 /**

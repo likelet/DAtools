@@ -36,7 +36,7 @@ public class CombineRSEMmatrix {
     private boolean isIsformlevel=false;
     private String transcriptMappingfile;
     public  boolean isCount=false;
-    private String refvesion="hg38";
+    private String gtffle="";// gtf file that you used for mapping RSEM
     
     private String suffix=".genes.results";
 
@@ -55,8 +55,8 @@ public class CombineRSEMmatrix {
         this.transcriptMappingfile = transcriptMappingfile;
     }
 
-    public void setRefvesion(String refvesion) {
-        this.refvesion = refvesion;
+    public void setGtffile(String gtffle) {
+        this.gtffle = gtffle;
     }
 
     
@@ -81,20 +81,8 @@ public class CombineRSEMmatrix {
 
         HashMap<String, String> ensemblemap = null;
         
-        if(this.refvesion.endsWith("hg19")){
-                 ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodehg19mapfile")));
-        }else{
-        if (isIsformlevel && transcriptMappingfile != null) {
-            ensemblemap = ReadEnsembleMapfile.getEnsembleMapWithTranscriptID(new InputStreamReader(new FileInputStream(new File(transcriptMappingfile))));
-        } else if (isgencode && isIsformlevel) {
-            ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream(transcriptMappingfile)));
-        } else if (isgencode) {
-            ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodeGENEmapfile")));
-        } else {
-            ensemblemap = ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/ensembleGENEmapfile")));
-
-        }
-        }
+        ensemblemap = ReadEnsembleMapfile.getEnsembleMapFromGTF(gtffle);
+     
             
         System.out.println(ensemblemap.size());
         Multifile2matrix mm=null;
@@ -114,9 +102,12 @@ public class CombineRSEMmatrix {
         FileWriter fw;
         try {
             fw = new FileWriter(new File(outfile));
-            if(this.isIsformlevel){
-               fw.append("ID\tTranscriptName\tGeneName\tGeneType\tStrand\t"); 
-            }else{
+            if (this.gtffle == "") {
+                System.out.println("no gtffile input, ignoring id conversion");
+                fw.append("ID\t");
+            } else if (this.isIsformlevel) {
+                fw.append("ID\tTranscriptName\tGeneName\tGeneType\tStrand\t");
+            } else  {
                 fw.append("ID\tGeneName\tGeneType\t");
             }
             String headerstr="";
@@ -129,7 +120,12 @@ public class CombineRSEMmatrix {
             for (Iterator it1 = allIterm.iterator(); it1.hasNext();) {
                 String rowstr = (String) it1.next();
 //                rowstr=rowstr.split("||.")[0];
-                String tempstr2 = ensemblemap.get(rowstr);
+                String tempstr2;
+                if (this.gtffle == null) {
+                    tempstr2 = rowstr;
+                } else {
+                    tempstr2 = ensemblemap.get(rowstr);
+                }
                 //get count or tpm
                 if(this.isCount){
                     for (int i = 0; i < filehashstr.get(rowstr).size(); i++) {

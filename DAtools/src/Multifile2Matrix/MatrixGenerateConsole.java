@@ -46,12 +46,10 @@ public class MatrixGenerateConsole {
                     + ToolsforCMD.print_ansi_YELLOW("Merged readscount matrix (RSEM mode only) from isform level,DEFAUL closed\r\n"));
             System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-tpm\t")
                     + ToolsforCMD.print_ansi_YELLOW("Merged TPM matrix (RSEM mode only),DEFAUL closed\r\n")); 
-            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-gencode\t")
-                    + ToolsforCMD.print_ansi_YELLOW("Using gencode annotation (RSEM mode only),DEFAUL ensemble was used \r\n"));
             System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-annofile\t ")
                     + ToolsforCMD.print_ansi_YELLOW("User defined annofile,DEFAULT 2\r\n"));
-            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-reversion\t ")
-                    + ToolsforCMD.print_ansi_YELLOW("genomeversion,DEFAULT hg19\r\n"));
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-gtf\t ")
+                    + ToolsforCMD.print_ansi_YELLOW("GTF that you used for mapping \r\n"));
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("combineMatrix")) {
             if (args.length <=9) {
                 System.out.println(ToolsforCMD.startruningSTR());
@@ -86,10 +84,11 @@ public class MatrixGenerateConsole {
                     cc.setCol("6");
                     System.out.println("Combine tpm feature column of RSEM output ");
                 }
-                 if (FunctionClass.isContainParameter(args, "-gencode")) {
-                    cc.setIsgencode(true);
-                    System.out.println("Using genecode annotation of parsing RSEM output ");
-                } 
+                 if (FunctionClass.isContainParameter(args, "-fpkm")) {
+                    cc.setCol("7");
+                    System.out.println("Combine tpm feature column of RSEM output ");
+                }
+                 
                  if (FunctionClass.isContainParameter(args, "-annofile")) {
                     cc.setTranscriptMappingfile(FunctionClass.getArgsParameter(args, "-annofile"));
                     System.out.println("Using selfdefined annotation of parsing RSEM output ");
@@ -97,9 +96,8 @@ public class MatrixGenerateConsole {
                  if (FunctionClass.isContainParameter(args, "-excel")) {
                      System.out.println(ToolsforCMD.print_ansi_YELLOW("-excel option for RSEM output matrix was not implemented yet"));
                 }
-                 if (FunctionClass.isContainParameter(args, "-refversion")) {
-                      cc.setRefvesion(FunctionClass.getArgsParameter(args, "-refversion"));
-                     System.out.println(ToolsforCMD.print_ansi_YELLOW("-refversion option for RSEM output matrix was not implemented yet"));
+                 if (FunctionClass.isContainParameter(args, "-gtf")) {
+                      cc.setGtffile(FunctionClass.getArgsParameter(args, "-gtf"));
                 }
                  cc.process();
            

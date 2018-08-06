@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ExomeSeqAnalysisPipe.CONTRAanalysis;
+package ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis;
 
 import dataformat.FAIterm;
 import java.util.ArrayList;

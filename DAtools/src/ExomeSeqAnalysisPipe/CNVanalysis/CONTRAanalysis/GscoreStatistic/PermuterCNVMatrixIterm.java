@@ -2,7 +2,7 @@
  shulfle genes cnv in CNV matrix to calculating distribution of Gscore
  */
 
-package ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic;
+package ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic;
 
 import java.util.ArrayList;
 import java.util.Collections;

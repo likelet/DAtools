@@ -40,7 +40,24 @@ public class FormatTransfer {
                  System.out.println(ToolsforCMD.print_ansi_RED(String.valueOf(countline))+" line is skipped due to null GATKcombineVariant object\r\n");
                 continue;
             }
-            AnnovarDB_TXT at = new AnnovarDB_TXT(gbv.getCHROM(),gbv.getPOS(),gbv.getPOS(),gbv.getREF(),gbv.getALT(),gbv.getFrequency());
+            AnnovarDB_TXT at = new AnnovarDB_TXT(gbv.getCHROM(),gbv.getPOS(),gbv.getPOS(),gbv.getREF(),gbv.getALT().split(",")[0],Double.parseDouble(gbv.getFrequency()));
+            //refine indel range from  
+            if(at.getREF().length()!=at.getALT().length() && at.getREF().length()>1){
+               String ref = at.getREF().substring(1, at.getREF().length());
+               String alt = "-";
+               at.setREF(ref);
+               at.setALT(alt);
+               at.setSTART(String.valueOf(Integer.parseInt(at.getSTART())));
+               at.setEND(String.valueOf(Integer.parseInt(at.getEND())+at.getREF().length()));
+           } else if (at.getREF().length() != at.getALT().length() && at.getREF().length() == 1) {
+               String ref = "-";
+               String tempstr=at.getALT();
+               String alt = tempstr.substring(1, tempstr.length());
+               at.setREF(ref);
+               at.setALT(alt);
+               at.setSTART(String.valueOf(Integer.parseInt(at.getSTART())));
+               at.setEND(String.valueOf(Integer.parseInt(at.getEND())+at.getREF().length()));
+           }
             fw.append(at.toString()+"\n");
             fw.flush();
         }
@@ -71,4 +88,10 @@ public class FormatTransfer {
        
         
    }
+   //test code s
+    public static void main(String[] args) {
+        String tempstr="C".split(",")[1];
+               String alt = tempstr.substring(1, tempstr.length());
+        System.out.println(alt);   
+    }
 }

@@ -47,4 +47,31 @@ public class GTF9_reader {
         }
         return gtflist;
     }
+    
+    // read att only lines 
+    public static ArrayList<GTF9>getGTF9list(String inputfile, String att){
+        ArrayList<GTF9> gtflist=new ArrayList<GTF9>();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(new File(inputfile)));
+            String []str ;
+            while (br.ready()) {
+                str = br.readLine().split("\t");
+                if (str[0].startsWith("#") || str.length == 1) {
+                    System.out.println("skip lines started with # or unformated.");
+                } else if(str[2].equals(att)){
+               
+                    GTF9 gtf = new GTF9(str[0], str[1], str[2], Integer.parseInt(str[3]), Integer.parseInt(str[4]), str[5], str[6], str[7], str[8]);
+                    gtflist.add(gtf);
+                }
+
+            }
+            br.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println(inputfile + " is not found! please check your filepath ");
+        } catch (IOException ex) {
+            System.out.println("IO error");
+        }
+        return gtflist;
+    }
 }

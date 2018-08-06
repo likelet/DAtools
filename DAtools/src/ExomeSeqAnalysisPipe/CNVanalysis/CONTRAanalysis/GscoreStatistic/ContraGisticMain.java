@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic;
+package ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic;
 
 /**
  * <p>ContraGisticMain</p>

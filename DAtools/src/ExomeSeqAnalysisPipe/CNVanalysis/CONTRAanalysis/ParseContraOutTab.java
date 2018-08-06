@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ExomeSeqAnalysisPipe.CONTRAanalysis;
+package ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis;
 
 import java.io.BufferedReader;
 import java.io.File;

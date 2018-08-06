@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ExomeSeqAnalysisPipe.CONTRAanalysis.summaryContra;
+package ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.summaryContra;
 
-import ExomeSeqAnalysisPipe.CONTRAanalysis.ContraOutTab;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.ParseContraOutTab;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.ContraOutTab;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.ParseContraOutTab;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

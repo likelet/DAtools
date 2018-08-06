@@ -10,6 +10,7 @@ package ExomeSeqAnalysisPipe.GATKresultParse;
 import java.util.List;
 import java.util.stream.Collectors;
 import htsjdk.samtools.util.CollectionUtil;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -119,14 +120,15 @@ public class GATKcombineVariant_format {
         this.SampleVariant = SampleVariant;
     }
     
-    public double getFrequency(){
+    public String getFrequency(){
         int mut_sample=0;
         for (int i = 0; i < SampleVariant.length; i++) {
-            if(!SampleVariant[i].startsWith("\\.")){
+            if(!SampleVariant[i].startsWith(".")){
                 mut_sample++;
             }
         }
-        return (double)(mut_sample/SampleVariant.length);
+        DecimalFormat df = new DecimalFormat("0.0000");
+        return df.format((double)mut_sample/(double)SampleVariant.length);
     }
     
      public String toString() {
@@ -138,7 +140,6 @@ public class GATKcombineVariant_format {
          }
         return str+"\t"+tempstr;
     }
-    
-    
+   
             
 }

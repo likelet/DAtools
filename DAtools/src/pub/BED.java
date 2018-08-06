@@ -33,7 +33,13 @@ public class BED {
         this.chromEnd = chromEnd;
     }
 
-    
+     public BED(String chrom, int chromStart, int chromEnd,String genename) {
+        this.chrom = chrom;
+        this.chromStart = chromStart;
+        this.chromEnd = chromEnd;
+        this.name=genename;
+    }
+
     
     public BED(String chrm,int start,int end, String name, String strand) {
         this.chrom=chrm;

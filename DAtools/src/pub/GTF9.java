@@ -131,6 +131,7 @@ public class GTF9 {
         }
         return str;
     }
+    
 
     public String getSpecificAttrbute(String key) {
         return this.attrbutemap.get(key).replace("\"", "");

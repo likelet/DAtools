@@ -10,9 +10,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pub.GTF9;
+import pub.GTF9_reader;
 
 /**
  *
@@ -73,6 +76,22 @@ public static HashMap<String,String> getEnsembleMapWithTranscriptID(InputStreamR
     }
      return map;
 }
+public static HashMap<String,String> getEnsembleMapFromGTF(String GTFfile){
+    
+    ArrayList<GTF9> gtflist=GTF9_reader.getGTF9list(GTFfile, "gene");
+    HashMap<String,String> map=null;
+         map=new HashMap<String,String> ();
+          
+        for (int i = 0; i < gtflist.size(); i++) {
+            GTF9 tempgtf=gtflist.get(i);
+            String tempstr=tempgtf.getSpecificAttrbute("gene_id")+"\t"+tempgtf.getSpecificAttrbute("gene_name")+"\t"+tempgtf.getSpecificAttrbute("gene_type");
+            map.put(tempgtf.getSpecificAttrbute("gene_id"), tempstr);
+        }
+    
+     return map;
+}
+
+
     public static void main(String[] args) {
 //        ClassLoader classLoader = getClass.getClassLoader();
 //        HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(this.getClass().getResource("src\\Multifile2Matrix\\CombineRSEMmatrix\\ensembleGENEmapfile").getFile());

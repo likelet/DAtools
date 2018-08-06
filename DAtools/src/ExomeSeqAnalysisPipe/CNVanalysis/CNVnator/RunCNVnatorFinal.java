@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ExomeSeqAnalysisPipe.CNVnator;
+package ExomeSeqAnalysisPipe.CNVanalysis.CNVnator;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

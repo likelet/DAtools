@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package ExomeSeqAnalysisPipe.CONTRAanalysis.summaryContra;
+package ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.summaryContra;
 
-import ExomeSeqAnalysisPipe.CONTRAanalysis.ContraOutTab;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
-import ExomeSeqAnalysisPipe.CONTRAanalysis.SegementWindows;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.ContraOutTab;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.GscoreStatistic.CNVMatrixIterm;
+import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.SegementWindows;
 import dataformat.FAIterm;
 import dataformat.FAItermReader;
 import java.io.BufferedReader;
