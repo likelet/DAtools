@@ -6,6 +6,7 @@
 package RNAseqPipeline;
 
 import RNAseqPipeline.CountRPKMfromCount.getCountMatrixFromMap;
+import RNAseqPipeline.DifferentialExpressionAnalysis.DEGeneAnalysis;
 import RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF.computeRPKM;
 import java.io.IOException;
 import pub.FunctionClass;
@@ -40,6 +41,9 @@ public class RNAseqConsole {
             System.out.println("RNAseq Differential analysi with readscount by HTseq:   \r\n\t\tCMD \r\n\t\t"
                     + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -RNAseq -mode pipe" )
                     + ToolsforCMD.print_ansi_CYAN( " <fastq1> <fastq2> <library:bowtie2 library> <gtf>\r\n" ));
+            System.out.println("Differential Expression analysis with Poisson Test:   \r\n\t\tCMD \r\n\t\t"
+                    + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -RNAseq -mode poissonDE" )
+                    + ToolsforCMD.print_ansi_CYAN( " <countfile1> <countfile2> <outfile>\r\n" ));
 
             System.out.println("Extra paramters for pipe  \r\n\t\t-username\t user defined name in output\r\n");
             System.out.println("\r\n\t\t-t\t htseq-count -t parameter:feature type (3rd column in GFF file) to be used, all features of other type are ignored (default, suitable for Ensembl GTF files: exon)\r\n");
@@ -83,7 +87,11 @@ public class RNAseqConsole {
             }
             rt.runTophat2HTseqGetCountfilePaired();
 
-        } else {
+        } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("poissonDE")) {
+            DEGeneAnalysis deg = new DEGeneAnalysis(args[3], args[4],args[5]);
+             deg.getDEgenePvalue();
+             deg.getOutputFile();
+        }else {
             System.out.println("Please specified -mode parameters!");
         }
     }
