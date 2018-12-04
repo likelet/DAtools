@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Multifile2Matrix.CombineRSEMmatrix;
+package pub;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -26,6 +26,7 @@ import pub.GTF9_reader;
  */
 public class ReadEnsembleMapfile {
 public static HashMap<String,String> getEnsembleMap(InputStreamReader in){
+    
     BufferedReader br=null;
     HashMap<String,String> map=null;
     try {
@@ -77,7 +78,7 @@ public static HashMap<String,String> getEnsembleMapWithTranscriptID(InputStreamR
      return map;
 }
 public static HashMap<String,String> getEnsembleMapFromGTF(String GTFfile){
-    
+     System.out.println(ToolsforCMD.print_ansi_CYAN("Parsing GTF file " + GTFfile));
     ArrayList<GTF9> gtflist=GTF9_reader.getGTF9list(GTFfile, "gene");
     HashMap<String,String> map=null;
          map=new HashMap<String,String> ();

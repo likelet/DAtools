@@ -1,7 +1,7 @@
 package RNAseqPipeline.DifferentialExpressionAnalysis;
 
 import Algorithm.MultipleCorrection.FDR;
-import Multifile2Matrix.CombineRSEMmatrix.ReadEnsembleMapfile;
+import pub.ReadEnsembleMapfile;
 import RNAseqPipeline.GeneLengthFileReader;
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,30 +46,32 @@ public class DEGeneAnalysis {
     private String filename2 = "Sample2";
     private ArrayList<Double> plist=new ArrayList<Double>();
     public String type="com";
-    private HashMap<String,String> ensemblemap= ReadEnsembleMapfile.getEnsembleMap(new InputStreamReader(this.getClass().getResourceAsStream("/Multifile2Matrix/CombineRSEMmatrix/gencodeGENEmapfile")));
-        
+    private HashMap<String,String> ensemblemap= null;
+    private String gtffle="";// gtf file that you used for mapping RSEM    
 
     public DEGeneAnalysis() {
     }
 
+    public void setGtffile(String gtffle) {
+        this.gtffle = gtffle;
+    }
+    
+    
     public DEGeneAnalysis(String countFile1, String countFile2, String outputFile) throws IOException {
         if (countFile1.endsWith("genes.results")) {
             System.out.println(ToolsforCMD.print_ansi_CYAN("Parsing your file as RSEM output format, press ctrl+z if not expected "));
-            type="rsem";
+            this.type="rsem";
         } 
         this.countFile1=countFile1;
         this.countFile2=countFile2;
         this.outputFile=outputFile;
-        
-//        this.getDEgenePvalue(countFile1, countFile2,type);
-//        this.getOutputFile(outputFile);
     }
 
     public void getDEgenePvalue() throws FileNotFoundException, IOException {
         if (type.equals("rsem")) {
             countList = countListRSEM(countFile1, countFile2);
         }else if (type.equals("htseq")) {
-            countList = countListRSEM(countFile1, countFile2);
+            countList = countListHTseq(countFile1, countFile2);
         }else if (type.equals("com")){
         countList = countListCommon(countFile1, countFile2);
         }
@@ -143,34 +145,6 @@ public class DEGeneAnalysis {
         countData.setLog2FC(FC);
 
     }
-
-    //runR to calculate FDR; return fdrlistFile, Def
-//    public String calculateFdrByR(String Pvaluefile) throws IOException {
-//        File pvaluefile = new File(Pvaluefile);
-//        pvaluefile.deleteOnExit();
-//        File Rscriptpathfile = new File("calFDR.R");
-//        Rscriptpathfile.deleteOnExit();
-//        FileWriter fw = new FileWriter(Rscriptpathfile);
-//
-//        String outputpath = "fdr.txt";
-//
-////        tempfile.deleteOnExit();
-//        String str = "";
-//
-//        //System.out.println(dirOut);
-////        str = "setwd(\"" + Rscriptdir + "\")\n";
-//        str += "dataset<-read.table(\"" + Pvaluefile + "\",header=F)\n";
-//        str += "data<-dataset[,1]\n";
-//        str += "fdr<-p.adjust(data,method=\"fdr\")\n";
-//        str += "write.table(fdr,\"" + outputpath + "\",row.names=F)\n";
-//        fw.append(str);
-//        fw.flush();
-//        fw.close();
-//
-//        Rexe rexe = new Rexe(Rscriptpathfile.getAbsolutePath(), true);
-//        return outputpath;
-//
-//    }
 
     private double getPvalue(int x, int y) {
         double lnPvalue = y * log(N) + getLnSum(x + y) - getLnSum(x) - getLnSum(y) - (x + y + 1) * log(1 + N);
@@ -256,9 +230,13 @@ public class DEGeneAnalysis {
         }
         return countList;
     }
-private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2) throws FileNotFoundException {
+    private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2) throws FileNotFoundException {
 
         ArrayList<DEGeneForm> countList = new ArrayList();
+        
+        if(this.gtffle!=null){
+            ensemblemap = ReadEnsembleMapfile.getEnsembleMapFromGTF(gtffle);
+        }
         try {
             BufferedReader br1 = new BufferedReader(new java.io.FileReader(countFile1));
             BufferedReader br2 = new BufferedReader(new java.io.FileReader(countFile2));
@@ -268,21 +246,42 @@ private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2
             double sample2 = 0;
             br1.readLine();
             br2.readLine();
-            while (br1.ready()) {
-                String data1 = br1.readLine();
-                String[] dataArr1 = data1.split("\t");
-                String geneName = dataArr1[0];
-                String data2 = br2.readLine();
-                String[] dataArr2 = data2.split("\t");
-                double sample1Count = Double.parseDouble(dataArr1[4]);
-                sample1 = sample1 + sample1Count;
-                double sample2Count = Double.parseDouble(dataArr2[4]);
-                sample2 = sample2 + sample2Count;
-                DEGeneForm df=new DEGeneForm(geneName, (int) Math.round(sample1Count), (int) Math.round(sample2Count), Double.parseDouble(dataArr1[6]), Double.parseDouble(dataArr2[6]), 0);
-                df.setGeneNameDetails(ensemblemap.get(geneName).split("\t")[1]);
-                df.setGenetype(ensemblemap.get(geneName).split("\t")[2]);
-                countList.add(df);
+            if (ensemblemap != null) {
+                while (br1.ready()) {
+                    String data1 = br1.readLine();
+                    String[] dataArr1 = data1.split("\t");
+                    String geneName = dataArr1[0];
+                    String data2 = br2.readLine();
+                    String[] dataArr2 = data2.split("\t");
+                    double sample1Count = Double.parseDouble(dataArr1[4]);
+                    sample1 = sample1 + sample1Count;
+                    double sample2Count = Double.parseDouble(dataArr2[4]);
+                    sample2 = sample2 + sample2Count;
+                    DEGeneForm df = new DEGeneForm(geneName, (int) Math.round(sample1Count), (int) Math.round(sample2Count), Double.parseDouble(dataArr1[6]), Double.parseDouble(dataArr2[6]), 0);
+                   if(ensemblemap.get(geneName)!=null){
+                       df.setGeneNameDetails(ensemblemap.get(geneName).split("\t")[1]);
+                       df.setGenetype(ensemblemap.get(geneName).split("\t")[2]);
+                   } 
+                    countList.add(df);
+                }
+            }else{
+                while (br1.ready()) {
+                    String data1 = br1.readLine();
+                    String[] dataArr1 = data1.split("\t");
+                    String geneName = dataArr1[0];
+                    String data2 = br2.readLine();
+                    String[] dataArr2 = data2.split("\t");
+                    double sample1Count = Double.parseDouble(dataArr1[4]);
+                    sample1 = sample1 + sample1Count;
+                    double sample2Count = Double.parseDouble(dataArr2[4]);
+                    sample2 = sample2 + sample2Count;
+                    DEGeneForm df = new DEGeneForm(geneName, (int) Math.round(sample1Count), (int) Math.round(sample2Count), Double.parseDouble(dataArr1[6]), Double.parseDouble(dataArr2[6]), 0);
+//                df.setGeneNameDetails(ensemblemap.get(geneName).split("\t")[1]);
+//                df.setGenetype(ensemblemap.get(geneName).split("\t")[2]);
+                    countList.add(df);
+                }
             }
+            
             this.lib1 = (int) Math.round(sample1);
             this.lib2 = (int) Math.round(sample2);
             int length = countList.size() - 1;
@@ -299,21 +298,27 @@ private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2
     public void getOutputFile() {
         System.out.println(ToolsforCMD.print_ansi_CYAN("Writing Out ..."));
         try {
-            FileWriter fw = new FileWriter(outputFile);
+            
+            String tempstr =null;
             if(type.equals("rsem")){
-                fw.write("Gene" + "\t" + "Sample1" + "\t" + "Sample2" + "\t" + "sample1_FPKM" + "\t" + "sample2_FPKM" + "\t" + "log2FC" + "\t" + "pValue" + "\t" + "FDR" + "\n");
-                for (Iterator<DEGeneForm> it = countList.iterator(); it.hasNext();) {
-                    DEGeneForm data = it.next();
-                    fw.write(data.toString() + "\n");
-                }
-            }else {
-                fw.write("Gene\tSample1\tSample2\tsample1_FPKM\tsample2_FPKM\tlog2FC\tpValue\tFDR\tGeneName\tType" + "\n");
+               tempstr = "Gene\t" + this.filename1 + "\t" + this.filename2 + "\t" + this.filename1 + "_FPKM\t" + this.filename2 + "_FPKM\tlog2FC\tpValue\tFDR\tGeneName\tType";
+            }else{
+               tempstr = "Gene\t" + this.filename1 + "\t" + this.filename2 + "\t" + this.filename1 + "_FPKM\t" + this.filename2 + "_FPKM\tlog2FC\tpValue\tFDR";
+            }
+          
+            FileWriter fw = new FileWriter(outputFile+".tsv");
+            fw.write(tempstr);
+            if (type.equals("rsem")) {
                 for (Iterator<DEGeneForm> it = countList.iterator(); it.hasNext();) {
                     DEGeneForm data = it.next();
                     fw.write(data.toString2() + "\n");
                 }
+            } else {
+                for (Iterator<DEGeneForm> it = countList.iterator(); it.hasNext();) {
+                    DEGeneForm data = it.next();
+                    fw.write(data.toString() + "\n");
+                }
             }
-            
             fw.flush();
             fw.close();
 
@@ -324,12 +329,7 @@ private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2
             CellStyle style = wb.createCellStyle();
             style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
             style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-            String tempstr =null;
-            if(type.equals("rsem")){
-               tempstr = "Gene\t" + this.filename1 + "\t" + this.filename2 + "\t" + this.filename1 + "_FPKM\t" + this.filename2 + "_FPKM\tlog2FC\tpValue\tFDR\tGeneName\tType";
-            }else{
-             tempstr = "Gene\t" + this.filename1 + "\t" + this.filename2 + "\t" + this.filename1 + "_FPKM\t" + this.filename2 + "_FPKM\tlog2FC\tpValue\tFDR";
-            }
+            
             String[] titleArr = tempstr.split("\t");
             Row row1 = sheet1.createRow((short) 0);
             for (int i = 0; i < titleArr.length; i++) {
@@ -356,8 +356,6 @@ private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2
                     row.createCell(8).setCellValue(degform.getGeneNameDetails());
                     row.createCell(9).setCellValue(degform.getGenetype());
                 }
-                
-                
                 rowIndex++;
             }
 
@@ -378,9 +376,7 @@ private ArrayList<DEGeneForm> countListRSEM(String countFile1, String countFile2
         System.out.println(deg.getPvalue(1, 1));
         System.out.println(deg.getLnSum(3));
         System.out.println(Math.exp(deg.getLnSum(3)));
-//        deg.gene2length = GeneLengthFileReader.getgeneLengthMap("H:\\gene_length.txt");
-////       deg.getDEgenePvalue("F:\\resouces\\projects\\戴阳硕_肖士课题组\\水稻\\定量\\Lox2-BPH-12h.count", "F:\\resouces\\projects\\戴阳硕_肖士课题组\\水稻\\定量\\Lox2-CK-12h.count");
-////        deg.getOutputFile("out.txt");
+
 
     }
 

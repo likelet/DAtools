@@ -123,7 +123,7 @@ public class ToolsforCMD {
                 + " |  __/| | | (_) | (_| | | | (_| | | | | | | \\__ | || (_| | |  | |_ _ _ _ _ _ _ _ _ _ \n"
                 + " |_|   |_|  \\___/ \\__, |_|  \\__,_|_| |_| |_| |___/\\__\\__,_|_|   \\__(_(_(_(_(_(_(_(_(_)\n"
                 + "                  |___/                                                               ";
-        return str;
+        return print_ansi_GREEN(str);
     }
 
     public static double getlog2(double a) {

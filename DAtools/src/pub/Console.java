@@ -61,7 +61,6 @@ public class Console {
         } else if (args[0].endsWith("-h")) {
             System.out.println(ToolsforCMD.print_ansi_PURPLE(ToolsforCMD.getDAtoolstr()));
             System.out.println(ToolsforCMD.print_ansi_PURPLE("Java-based Data Analysis tool for biological data process, version " + version) + "\r\n");
-
             System.out.println("Please input args\n Please refers to CMD：java -jar DAtools.jar -h for help");
             ArrayList<String> functionlist = new ArrayList<String>();
             
@@ -98,11 +97,8 @@ public class Console {
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("Remove SUMO-FC adaptors :   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -removeAdapter")
                     + ToolsforCMD.print_ansi_CYAN(" <fastafile> <adapter(TATA,CACA,GAGA)> <type(N/C)>"));
-            functionlist.add(ToolsforCMD.print_ansi_YELLOW("RNAseq Differential Expression Analysis(M):   \r\n\t\t")
-                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -RNAseqDE -mode WR(orSC)")
-                    + ToolsforCMD.print_ansi_CYAN(" <condition1> <condition2> <outputfile>  "));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("RNAseq Mappng/quantitifaction(M):   \r\n\t\t")
-                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -RNAseqpipe")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -RNAseq")
                     + ToolsforCMD.print_ansi_CYAN(" <fastq1> <fastq2> <library> <gtf> "));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("Seperate fastq File by index :   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -sepFastq")
@@ -166,6 +162,7 @@ public class Console {
             System.out.println("\r\n1.1. Modified \"Extract expression data from cufflinks outputfile\", addheader information");
 
         } else if (args[0].endsWith("-fastqP")) {
+            System.out.println(ToolsforCMD.startruningSTR());
             new FastQprocessConsole(args);
         } else if (args[0].endsWith("-venplot")) {
             if (args.length == 4) {
@@ -249,18 +246,9 @@ public class Console {
                 System.out.println("args error!");
             }
 
-        } else if (args[0].endsWith("-RNAseqpipe")) {
+        } else if (args[0].endsWith("-RNAseq")) {
+            System.out.println(ToolsforCMD.startruningSTR());
             new RNAseqConsole(args);
-        } else if (args[0].endsWith("-RNAseqDE")) {
-            if (args.length == 1) {
-                System.out.println(ToolsforCMD.print_ansi_YELLOW("RNAseq Mappng/quantitifaction:   \r\n\t\t") + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -RNAseqDE -mode WR(orSC) <condition1> <condition2> <outputfile>\r\n"));
-                System.out.println("Extra paramters  \r\n\t\t-mode\t WR(without replicates),SC(standard comparison) or MF(Multi factors)\r\n");
-//                System.out.println(" \r\n\t\t-fpkm\t calculate fpkm by supply a gene length file\r\n");
-            } else {
-                DEGeneAnalysis deg = new DEGeneAnalysis(args[3], args[4],args[5]); 
-                deg.getDEgenePvalue();
-                deg.getOutputFile();
-            }
         } else if (args[0].endsWith("-MM")) {
             new MatrixGenerateConsole(args);
         } else if (args[0].endsWith("-Fasta")) {

@@ -1,4 +1,5 @@
 package RNAseqPipeline.DifferentialExpressionAnalysis;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,16 +11,17 @@ package RNAseqPipeline.DifferentialExpressionAnalysis;
  * @author zhengyueyuan
  */
 public class DEGeneForm {
-    private String geneName;
-    private int sample1Counts;
-    private int sample2Counts;
-    private double sample1FPKM;
-    private double sample2FPKM;
-    private double log2FC;
-    private double pValue;
-    private double FDR;
-    private String geneNameDetails;// for RSEM
-    private String genetype;//RSEM
+
+    private String geneName="";
+    private int sample1Counts=0;
+    private int sample2Counts=0;
+    private double sample1FPKM=0;
+    private double sample2FPKM=0;
+    private double log2FC=0;
+    private double pValue=1;
+    private double FDR=1;
+    private String geneNameDetails="";// for RSEM
+    private String genetype="";//RSEM
 
     public DEGeneForm(String geneName, int sample1Counts, int sample2Counts, double sample1FPKM, double sample2FPKM, double log2FC) {
         this.geneName = geneName;
@@ -39,7 +41,7 @@ public class DEGeneForm {
         this.log2FC = log2FC;
         this.pValue = pValue;
     }
-    
+
     public DEGeneForm(String geneName, int sample1Counts, int sample2Counts, double sample1FPKM, double sample2FPKM, double log2FC, double pValue, double FDR) {
         this.geneName = geneName;
         this.sample1Counts = sample1Counts;
@@ -131,16 +133,13 @@ public class DEGeneForm {
         this.genetype = genetype;
     }
 
-    
-    
-    
     @Override
     public String toString() {
-        return geneName + "\t" + sample1Counts + "\t" + sample2Counts + "\t" + sample1FPKM + "\t" + sample2FPKM + "\t" + log2FC + "\t" + pValue + "\t" + FDR ;
+        return geneName + "\t" + sample1Counts + "\t" + sample2Counts + "\t" + sample1FPKM + "\t" + sample2FPKM + "\t" + log2FC + "\t" + pValue + "\t" + FDR;
     }
+
     public String toString2() {
-        return geneName + "\t" + geneNameDetails + "\t" + genetype + "\t" + sample1Counts + "\t" + sample2Counts + "\t" + sample1FPKM + "\t" + sample2FPKM + "\t" + log2FC + "\t" + pValue + "\t" + FDR ;
+        return geneName  + "\t" + sample1Counts + "\t" + sample2Counts + "\t" + sample1FPKM + "\t" + sample2FPKM + "\t" + log2FC + "\t" + pValue + "\t" + FDR+ "\t" + geneNameDetails + "\t" + genetype;
     }
-    
-            
+
 }

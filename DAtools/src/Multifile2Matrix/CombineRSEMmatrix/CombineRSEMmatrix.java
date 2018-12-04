@@ -6,6 +6,7 @@
 
 package Multifile2Matrix.CombineRSEMmatrix;
 
+import pub.ReadEnsembleMapfile;
 import Multifile2Matrix.Multifile2matrix;
 import java.io.File;
 import java.io.FileInputStream;

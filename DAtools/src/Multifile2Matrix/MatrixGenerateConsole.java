@@ -46,6 +46,8 @@ public class MatrixGenerateConsole {
                     + ToolsforCMD.print_ansi_YELLOW("Merged readscount matrix (RSEM mode only) from isform level,DEFAUL closed\r\n"));
             System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-tpm\t")
                     + ToolsforCMD.print_ansi_YELLOW("Merged TPM matrix (RSEM mode only),DEFAUL closed\r\n")); 
+            System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-fpkm\t")
+                    + ToolsforCMD.print_ansi_YELLOW("Merged FPKM matrix (RSEM mode only),DEFAUL closed\r\n")); 
             System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-annofile\t ")
                     + ToolsforCMD.print_ansi_YELLOW("User defined annofile,DEFAULT 2\r\n"));
             System.out.println(ToolsforCMD.print_ansi_RED("\r\n\t\t-gtf\t ")
