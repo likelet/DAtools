@@ -18,7 +18,7 @@ import ExomeSeqAnalysisPipe.RunCrest.RunCrestSVfinal;
 import ExomeSeqAnalysisPipe.SNPfrequencyInSamples.AnnotedSnpFrequencyInsamples;
 import ExomeSeqAnalysisPipe.SNPfrequencyInSamples.SNPfrequencyInSamples;
 import ExomeSeqAnalysisPipe.Var2scan2ICGCformat.SomaticeProcessing;
-import ExomeSeqAnalysisPipe.mafProcess.GVC2TCGAmaf.GVCsimp2tcgaMaf_main;
+//import ExomeSeqAnalysisPipe.mafProcess.GVC2TCGAmaf.GVCsimp2tcgaMaf_main;
 import ExomeSeqAnalysisPipe.mafProcess.annovarOut2Maf.AnnoTab2MAF;
 import ExomeSeqAnalysisPipe.mafProcess.vepMAF2TCGAmaf.VepMAF2TCGAmafMain;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class ExomeSeqConsole {
             System.out.println("Process VEP maf file\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode vep2tcgaMaf" )
                     + ToolsforCMD.print_ansi_CYAN( " infile outfile " ) + "\r\n");
             System.out.println("Process gvc 2 maf file\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode gvc2tcgaMaf" )
-                    + ToolsforCMD.print_ansi_CYAN( " infile outfile " ) + "\r\n");
+                    + ToolsforCMD.print_ansi_CYAN( " infile outfile [sampleID] " ) + "\r\n");
             System.out.println("Processing Contra Output\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode contraGscore" )
                     + ToolsforCMD.print_ansi_CYAN( " folderlist outfile  " ) + "\r\n");
             System.out.println("Processing Contra Output\r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode contraMatrix" )
@@ -131,11 +131,13 @@ public class ExomeSeqConsole {
             }
 
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("gvc2tcgaMaf")) {
-            if (args.length == 5) {
-                new GVCsimp2tcgaMaf_main().GVCsimp2tcgaMaf_main(args[3], args[4]);
-            } else {
-                System.out.println("arguments error, please check your parameters");
-            }
+//            if (args.length == 5) {
+//                new GVCsimp2tcgaMaf_main().GVCsimp2tcgaMaf_main(args[3], args[4]);
+//            } if (args.length == 6) {
+//                new GVCsimp2tcgaMaf_main().GVCsimp2tcgaMaf_main(args[3], args[4],args[5]);
+//            } else {
+//                System.out.println("arguments error, please check your parameters");
+//            }
 
         }else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("contraGscore")) {
             if (args.length == 6) {

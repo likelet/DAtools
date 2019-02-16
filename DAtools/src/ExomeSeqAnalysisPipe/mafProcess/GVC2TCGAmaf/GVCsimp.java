@@ -122,6 +122,39 @@ private String rsID;
         this.rsID = rsID;
     }
 
+    public GVCsimp(String Chromosome, String Position, String Ref, String Mut, String SampleID, String Depth, String Alt_count, String Function_region, String Mutation_type, String Gene_name, String Gene_ID, String Codon_change, String AA_change, String CDNA_change, String ExonicFunc, String GeneDetail, String ClinicalSignificance, String PhenotypeIDs, String SIFT_pred, String Polyphen2_HDIV_pred, String Polyphen2_HVAR_pred, String MutationTaster_pred, String MutationAssessor_pred, String FATHMM_pred, String PROVEAN_pred, String fathmm_MKL_coding_pred) {
+        this.Chromosome = Chromosome;
+        this.Position = Position;
+        this.Ref = Ref;
+        this.Mut = Mut;
+        this.SampleID = SampleID;
+        this.Depth = Depth;
+        this.Alt_count = Alt_count;
+        this.Function_region = Function_region;
+        this.Mutation_type = Mutation_type;
+        this.Gene_name = Gene_name;
+        this.Gene_ID = Gene_ID;
+        this.Codon_change = Codon_change;
+        this.AA_change = AA_change;
+        this.CDNA_change = CDNA_change;
+        this.ExonicFunc = ExonicFunc;
+        this.GeneDetail = GeneDetail;
+        this.ClinicalSignificance = ClinicalSignificance;
+        this.PhenotypeIDs = PhenotypeIDs;
+        this.SIFT_pred = SIFT_pred;
+        this.Polyphen2_HDIV_pred = Polyphen2_HDIV_pred;
+        this.Polyphen2_HVAR_pred = Polyphen2_HVAR_pred;
+        this.MutationTaster_pred = MutationTaster_pred;
+        this.MutationAssessor_pred = MutationAssessor_pred;
+        this.FATHMM_pred = FATHMM_pred;
+        this.PROVEAN_pred = PROVEAN_pred;
+        this.fathmm_MKL_coding_pred = fathmm_MKL_coding_pred;
+    }
+
+    
+    
+    
+    
     public String getChromosome() {
         return Chromosome;
     }
@@ -535,5 +568,9 @@ private String rsID;
         String str = fields.stream().map(String::valueOf).collect(Collectors.joining("\t"));
         return str;
     }
-
+ public String toStringindel() {
+        final List<?> fields = CollectionUtil.makeList(Chromosome,Position,Ref,Mut,SampleID,Depth,Alt_count,Function_region,Mutation_type,Gene_name,Gene_ID,Codon_change,AA_change,CDNA_change,ExonicFunc,GeneDetail,GeneSymbol,ClinicalSignificance,PhenotypeIDs,SIFT_pred,Polyphen2_HDIV_pred,Polyphen2_HVAR_pred,MutationTaster_pred,MutationAssessor_pred,FATHMM_pred,PROVEAN_pred,fathmm_MKL_coding_pred);
+        String str = fields.stream().map(String::valueOf).collect(Collectors.joining("\t"));
+        return str;
+    }
 }

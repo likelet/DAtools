@@ -84,12 +84,37 @@ public static MAF_maftools GVCsimp_2_tcga4maf_forMaftools_covert(GVCsimp mfbt){
    return maftoolsMAF;
 }
 
+public static MAF_maftools GVCsimp_2_tcga4maf_forMaftools_covert(GVCsimp mfbt,String SampleID){
+    MAF_maftools maftoolsMAF=new MAF_maftools();
+    maftoolsMAF.setHugo_Symbol(mfbt.getGene_name());
+    maftoolsMAF.setEntrez_Gene_Id(mfbt.getGene_ID());
+    maftoolsMAF.setCenter("SYSUCC");
+    maftoolsMAF.setNCBI_Build("hg19");
+    maftoolsMAF.setChromosome(mfbt.getChromosome());
+    maftoolsMAF.setStart_Position(mfbt.getPosition());
+    maftoolsMAF.setEnd_position(mfbt.getPosition());
+    maftoolsMAF.setStrand("+");
+    maftoolsMAF.setVariant_Classification(mfbt.getMutation_type());
+    maftoolsMAF.setVariant_Type("SNP");
+    maftoolsMAF.setReference_Allele(mfbt.getRef());
+    maftoolsMAF.setTumor_Seq_Allele1(mfbt.getMut());
+    maftoolsMAF.setTumor_Seq_Allele2(".");
+    maftoolsMAF.setTumor_Sample_Barcode(SampleID);
+    maftoolsMAF.setProtein_Change(mfbt.getAA_change());
+    maftoolsMAF.setI_transcript_name(mfbt.getExonicFunc());
+    maftoolsMAF.setI_TumorVAF_WU(mfbt.getMutAF_tumor());
+   return maftoolsMAF;
+}
 
-
-public static GVCsimp parsingGVCsimp(String str){
-    String []stringa=str.split("\t");
-    GVCsimp pgs;
-    pgs = new GVCsimp(stringa[0],stringa[1],stringa[2],stringa[3],stringa[4],stringa[5],stringa[6],stringa[7],stringa[8],stringa[9],stringa[10],stringa[11],stringa[12],stringa[13],stringa[14],stringa[15],stringa[16],stringa[17],stringa[18],stringa[19],stringa[20],stringa[21],stringa[22],stringa[23],stringa[24],stringa[25],stringa[26],stringa[27],stringa[28],stringa[29],stringa[30],stringa[31],stringa[32],stringa[33],stringa[34],stringa[35],stringa[36],stringa[37],stringa[38],stringa[39],stringa[40],stringa[41],stringa[42],stringa[43],stringa[44],stringa[45],stringa[46],stringa[47],stringa[48],stringa[49]);
-            return pgs;
-} 
+//public static GVCsimp parsingGVCsimp(String str){
+//    String []stringa=str.split("\t");
+//    GVCsimp pgs;
+//    if(stringa.length==50){
+//         pgs = new GVCsimp(stringa[0],stringa[1],stringa[2],stringa[3],stringa[4],stringa[5],stringa[6],stringa[7],stringa[8],stringa[9],stringa[10],stringa[11],stringa[12],stringa[13],stringa[14],stringa[15],stringa[16],stringa[17],stringa[18],stringa[19],stringa[20],stringa[21],stringa[22],stringa[23],stringa[24],stringa[25],stringa[26],stringa[27],stringa[28],stringa[29],stringa[30],stringa[31],stringa[32],stringa[33],stringa[34],stringa[35],stringa[36],stringa[37],stringa[38],stringa[39],stringa[40],stringa[41],stringa[42],stringa[43],stringa[44],stringa[45],stringa[46],stringa[47],stringa[48],stringa[49]);
+//    }else{
+//         pgs = new GVCsimp(stringa[0],stringa[1],stringa[2],stringa[3],stringa[4],stringa[5],stringa[6],stringa[7],stringa[8],stringa[9],stringa[10],stringa[11],stringa[12],stringa[13],stringa[14],stringa[15],stringa[16],stringa[17],stringa[18],stringa[19],stringa[20],stringa[21],stringa[22],stringa[23],stringa[24],stringa[25],stringa[26]);
+//       
+//    }
+//        return pgs;
+//} 
 }

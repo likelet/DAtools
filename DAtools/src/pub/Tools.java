@@ -7,14 +7,19 @@ import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.StringTokenizer;
+import java.util.zip.GZIPOutputStream;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -27,7 +32,7 @@ import javax.swing.JFrame;
  */
 public class Tools {
 
-    public final static Image GPS_ICON = Toolkit.getDefaultToolkit().getImage(Tools.class.getResource("/gui/image/GPS.png"));
+//    public final static Image GPS_ICON = Toolkit.getDefaultToolkit().getImage(Tools.class.getResource("/gui/image/GPS.png"));
     public final static String AA = "ARNDCQEGHILKMFPSTWYVBZX*";
     public static HashMap<Character, Integer> aaMap = getAAMap();
     public static String CURRENT_FILE_PATH = getCurrentFilePath();
@@ -357,5 +362,25 @@ public class Tools {
                   "     ######  #     #   #    ####   ####  ######  ####  \n" +
                   "================================================================\n";
         return str;
+    }
+    
+    public static void writeIntoGZ(String text, String fileName) throws FileNotFoundException, UnsupportedEncodingException, IOException{
+        System.out.println(ToolsforCMD.print_ansi_CYAN("Writing out : "+fileName));
+  
+        FileOutputStream output = new FileOutputStream(fileName);
+
+        Writer writer = new OutputStreamWriter(new GZIPOutputStream(output), "UTF-8");
+
+        writer.write(text);
+
+        writer.close();
+
+        output.close();
+
+    }
+    public static void main(String[] args) throws UnsupportedEncodingException, IOException {
+        StringBuffer test= new StringBuffer();
+        test.append("test");
+        Tools.writeIntoGZ(test.toString(), "test.txt.gz");
     }
 }

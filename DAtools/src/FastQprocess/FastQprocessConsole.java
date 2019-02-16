@@ -38,6 +38,10 @@ public class FastQprocessConsole {
                     + ToolsforCMD.print_ansi_CYAN( " <left> <constantlength> <all.fq/gz> " ) + "\r\n");
             System.out.println("Trim fastq by constant length and retain constant reads :   \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -fastqP -mode retainLength" )
                     + ToolsforCMD.print_ansi_CYAN( " <left> <inputfastq/gz> <outfastq/gz> " ) + "\r\n");
+            System.out.println("Filter fastq by constant length parameter for paired end data :   \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -fastqP -mode filterLength" )
+                    + ToolsforCMD.print_ansi_CYAN( " <length> <fastq1/gz> <fastq2/gz> " ) + "\r\n");
+            System.out.println("Match paired fast file by readsname and ordered :   \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -fastqP -mode match" )
+                    + ToolsforCMD.print_ansi_CYAN( " <inputfastq1/gz> <inputfastq2/gz> <outstring> " ) + "\r\n");
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("trimedFastqFilter")) {
             if (args.length == 9) {
                 // System.out.println();
@@ -90,6 +94,19 @@ public class FastQprocessConsole {
                 System.out.println(ToolsforCMD.startruningSTR());
                 String outname = ToolsforCMD.replaceSuffix(args[5], ".fq.gz", "_passed.fq");
                 new FastQprocess(args[4]).retainLengthFastq(Integer.parseInt(args[3]), outname);
+            } else {
+                System.out.println("arguments error, please check your parameters");
+            }
+        } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("filterLength")) {
+            if (args.length == 6) {
+                System.out.println(ToolsforCMD.startruningSTR());
+                new FastaQprocessMemory().processPairedFileEffi_filtered_length(Integer.parseInt(args[3]), args[4],args[5]);
+            } else {
+                System.out.println("arguments error, please check your parameters");
+            }
+        } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("match")) {
+            if (args.length == 6) {
+                new MatchFastQ(args[3],args[4],args[5]).process();
             } else {
                 System.out.println("arguments error, please check your parameters");
             }

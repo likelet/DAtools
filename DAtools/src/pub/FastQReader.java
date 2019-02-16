@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.zip.GZIPInputStream;
 
@@ -24,12 +26,15 @@ import java.util.zip.GZIPInputStream;
 public class FastQReader {
 
     private LinkedList<FastQ> fastqlist = new LinkedList<FastQ>();
+    private HashMap<String, FastQ> reads2FastqMap = new HashMap<String,FastQ>();
+    private ArrayList<String> readsNamelist= new ArrayList<String>();
     private int maxlength = 0;
 
     public FastQReader() {
     }
 
     public FastQReader(String fileinput) throws IOException {
+        System.out.println(ToolsforCMD.print_ansi_CYAN("Parsing your file as Fastq, press ctrl+z if not expected with file name :"+fileinput));
 
         File fqfile = new File(fileinput);
         BufferedReader br = null;
@@ -52,6 +57,9 @@ public class FastQReader {
             tempstr4 = br.readLine().trim();
             if (tempstr1.startsWith("@") && this.judgeSeq(tempstr2)) {
                 FastQ fq = new FastQ(tempstr1, tempstr2, tempstr3, tempstr4);
+                String readName=tempstr1.split("/")[0];
+                reads2FastqMap.put(readName, fq);
+                readsNamelist.add(readName);
                 count += 4;
                 fastqlist.add(fq);
                 if (fq.getSeqlength() > maxlength) {
@@ -88,6 +96,18 @@ public class FastQReader {
         return this.fastqlist;
     }
 
+    public HashMap<String, FastQ> getReads2FastqMap() {
+        return reads2FastqMap;
+    }
+
+    public ArrayList<String> getReadsNamelist() {
+        return readsNamelist;
+    }
+
+    
+    
+    
+    
     public int getMaxlength() {
         return maxlength;
     }
