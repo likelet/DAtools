@@ -18,6 +18,8 @@ import ExomeSeqAnalysisPipe.RunCrest.RunCrestSVfinal;
 import ExomeSeqAnalysisPipe.SNPfrequencyInSamples.AnnotedSnpFrequencyInsamples;
 import ExomeSeqAnalysisPipe.SNPfrequencyInSamples.SNPfrequencyInSamples;
 import ExomeSeqAnalysisPipe.Var2scan2ICGCformat.SomaticeProcessing;
+import ExomeSeqAnalysisPipe.VirusAnalysis.FilterBam_good_unmapped_mate;
+import ExomeSeqAnalysisPipe.VirusAnalysis.GetReadsMappedTwoDifferentChr;
 //import ExomeSeqAnalysisPipe.mafProcess.GVC2TCGAmaf.GVCsimp2tcgaMaf_main;
 import ExomeSeqAnalysisPipe.mafProcess.annovarOut2Maf.AnnoTab2MAF;
 import ExomeSeqAnalysisPipe.mafProcess.vepMAF2TCGAmaf.VepMAF2TCGAmafMain;
@@ -65,6 +67,10 @@ public class ExomeSeqConsole {
                     + ToolsforCMD.print_ansi_CYAN( " pairedsampletable faifile outmatrix gscorefile  " ) + "\r\n");
             System.out.println("Summary the coverage of Exome-seq data \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode cov" )
                     + ToolsforCMD.print_ansi_CYAN( " regionfile outfile " ) + "\r\n");
+            System.out.println("get one mapped paired reads from bamfile \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode virus1" )
+                    + ToolsforCMD.print_ansi_CYAN( " inputbam outbam " ) + "\r\n");
+             System.out.println("get bam reads mapped to differ chromose \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode virus2" )
+                    + ToolsforCMD.print_ansi_CYAN( " inputbam outbam " ) + "\r\n");
 
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("snpfre")) {
             new SNPfrequencyInSamples(args[3], args[4]);
@@ -178,7 +184,23 @@ public class ExomeSeqConsole {
                 System.out.println("arguments error, please check your parameters");
             }
 
-        } else {
+        } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("virus1")) {
+            if (args.length == 5) {
+                System.out.println(ToolsforCMD.startruningSTR());
+                FilterBam_good_unmapped_mate.process(args[3], args[4]);
+            } else {
+                System.out.println("arguments error, please check your parameters");
+            }
+
+        }else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("virus2")) {
+            if (args.length == 5) {
+                System.out.println(ToolsforCMD.startruningSTR());
+                GetReadsMappedTwoDifferentChr.process(args[3], args[4]);
+            } else {
+                System.out.println("arguments error, please check your parameters");
+            }
+
+        }else {
             System.out.println("Please specified -mode parameters!");
         }
     }
