@@ -12,6 +12,7 @@ import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.summaryContra.summaryCont
 import ExomeSeqAnalysisPipe.CNVanalysis.CONTRAanalysis.summaryContra.summaryContraResultWithChromeBind;
 import ExomeSeqAnalysisPipe.CoverageGenerate.CoverageForExomeSeq;
 import ExomeSeqAnalysisPipe.GATKresultParse.FormatTransfer;
+import ExomeSeqAnalysisPipe.GISTIC2.GATK_CNV_2_GISTIC;
 import java.io.IOException;
 import ExomeSeqAnalysisPipe.RunCrest.RunCrestExtractSclipFinal;
 import ExomeSeqAnalysisPipe.RunCrest.RunCrestSVfinal;
@@ -71,6 +72,8 @@ public class ExomeSeqConsole {
                     + ToolsforCMD.print_ansi_CYAN( " inputbam outbam " ) + "\r\n");
              System.out.println("get bam reads mapped to differ chromose \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode virus2" )
                     + ToolsforCMD.print_ansi_CYAN( " inputbam outbam " ) + "\r\n");
+             System.out.println("Convert GATK CNV result to gistic input \r\n\t\t" + ToolsforCMD.print_ansi_GREEN( "java -jar DAtools.jar -exome -mode gatkcnv2gistic" )
+                    + ToolsforCMD.print_ansi_CYAN( " <CR.SEG> [outfilename]" ) + "\r\n");
 
         } else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("snpfre")) {
             new SNPfrequencyInSamples(args[3], args[4]);
@@ -197,6 +200,17 @@ public class ExomeSeqConsole {
                 System.out.println(ToolsforCMD.startruningSTR());
                 GetReadsMappedTwoDifferentChr.process(args[3], args[4]);
             } else {
+                System.out.println("arguments error, please check your parameters");
+            }
+
+        }else if (FunctionClass.getArgsParameter(args, "-mode").equalsIgnoreCase("gatkcnv2gistic")) {
+            if (args.length == 4) {
+                System.out.println(ToolsforCMD.startruningSTR());
+                new GATK_CNV_2_GISTIC(args[3]).processAll();
+            }else if (args.length == 5) {
+                System.out.println(ToolsforCMD.startruningSTR());
+                new GATK_CNV_2_GISTIC(args[3],args[4]).processAll();
+            }else {
                 System.out.println("arguments error, please check your parameters");
             }
 

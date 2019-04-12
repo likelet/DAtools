@@ -16,23 +16,43 @@ import java.util.stream.Collectors;
  * @author Qi Zhao
  */
 public class MAF_maftools {
+    public static final String mafheader="Hugo_Symbol\t"
+            + "Entrez_Gene_Id	"
+            + "Center	"
+            + "NCBI_Build	"
+            + "Chromosome	"
+            + "Start_position	"
+            + "End_position	"
+            + "Strand	"
+            + "Variant_Classification	"
+            + "Variant_Type\t"
+            + "Reference_Allele\t"
+            + "Tumor_Seq_Allele1\t"
+            + "Tumor_Seq_Allele2\t"
+            + "Tumor_Sample_Barcode\t"
+            + "Protein_Change\t"
+            + "i_TumorVAF_WU\t"
+            + "i_transcript_name";
     private String Hugo_Symbol;
-    private String Entrez_Gene_Id;
-    private String Center;
-    private String NCBI_Build;
+    private String Entrez_Gene_Id=".";
+    private String Center=".";
+    private String NCBI_Build=".";
     private String Chromosome;
     private String Start_Position;
     private String End_position;
-    private String Strand;
+    private String Strand=".";
     private String Variant_Classification;
     private String Variant_Type;
     private String Reference_Allele;
     private String Tumor_Seq_Allele1;
-    private String Tumor_Seq_Allele2;
+    private String Tumor_Seq_Allele2="";
     private String Tumor_Sample_Barcode;
-    private String Protein_Change;
-    private String i_TumorVAF_WU;
-    private String i_transcript_name;
+    private String Protein_Change=".";
+    private String i_TumorVAF_WU="";
+    private String i_transcript_name=".";
+    private String others=".";
+    
+    
 
     public MAF_maftools() {
     }
@@ -194,8 +214,18 @@ public class MAF_maftools {
         this.i_transcript_name = i_transcript_name;
     }
 
+    public String getOuthers() {
+        return others;
+    }
+
+    public void setOuthers(String others) {
+        this.others = others;
+    }
+
+    
+    
      public String toString() {
-        final List<?> fields = CollectionUtil.makeList(Hugo_Symbol,Entrez_Gene_Id,Center,NCBI_Build,Chromosome,Start_Position,End_position,Strand,Variant_Classification,Variant_Type,Reference_Allele,Tumor_Seq_Allele1,Tumor_Seq_Allele2,Tumor_Sample_Barcode,Protein_Change,i_TumorVAF_WU,i_transcript_name);
+        final List<?> fields = CollectionUtil.makeList(Hugo_Symbol,Entrez_Gene_Id,Center,NCBI_Build,Chromosome,Start_Position,End_position,Strand,Variant_Classification,Variant_Type,Reference_Allele,Tumor_Seq_Allele1,Tumor_Seq_Allele2,Tumor_Sample_Barcode,Protein_Change,i_TumorVAF_WU,i_transcript_name,others);
         String str = fields.stream().map(String::valueOf).collect(Collectors.joining("\t"));
         return str;
     }

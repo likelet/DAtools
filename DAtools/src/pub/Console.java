@@ -9,6 +9,7 @@ import BedProcess.BedProcessConsole;
 import BlastResultXMLsplit.BlastXMLsplit;
 import RNAseqPipeline.DoseCompensation.RemoveIntersectRegionFromGTF.RemoveIntersectProcess;
 import ExomeSeqAnalysisPipe.ExomeSeqConsole;
+import ExomeSeqAnalysisPipe.mafProcess.MAFprocess;
 import FastQprocess.FastQprocess;
 import FastQprocess.FastQprocessConsole;
 import FastQprocess.seperateFastQByindex;
@@ -125,6 +126,8 @@ public class Console {
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -bed"));
             functionlist.add(ToolsforCMD.print_ansi_YELLOW("Array data process function :   \r\n\t\t")
                     + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -array"));
+            functionlist.add(ToolsforCMD.print_ansi_YELLOW("MAFfile convert functions  :   \r\n\t\t")
+                    + ToolsforCMD.print_ansi_GREEN("java -jar DAtools.jar -maf"));
             Collections.sort(functionlist);
             for (int i = 0; i < functionlist.size(); i++) {
                 
@@ -139,6 +142,7 @@ public class Console {
 
         } else if (args[0].endsWith("-updateinfor")) {
             System.out.println("\r\nUpdate information\r\n");
+            System.out.println("\r\n2.7.4 add haplox vcf convert to maf file function");
             System.out.println("\r\n2.7.4 add exome-seq analysis tools 4: GATKcombineVariant_To_AnnovarDB");
             System.out.println("\r\n2.7.3 add varscan2anovar in converFormat function ");
             System.out.println("\r\n2.7.2 unique bed function ");
@@ -298,6 +302,8 @@ public class Console {
             new DoseCompansationConsole(args);
         } else if (args[0].endsWith("-bed")) {
             new BedProcessConsole(args);
+        } else if (args[0].endsWith("-maf")) {
+            new MAFprocess(args);
         } else {
             System.out.println("command error!");
         }

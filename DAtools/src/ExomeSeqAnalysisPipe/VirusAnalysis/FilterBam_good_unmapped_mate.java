@@ -25,33 +25,6 @@ import java.util.ArrayList;
  */
 public class FilterBam_good_unmapped_mate {
 
-    public static ArrayList<SAMRecord> resolve_mates(ArrayList<SAMRecord> sammate) {
-        ArrayList<SAMRecord> emptyList = new ArrayList<SAMRecord>();
-        for (int i = 0; i < sammate.size(); i++) {
-            SAMRecord sr = sammate.get(i);
-            if (!virusTools.is_good_read(sr)) {
-                return (emptyList);
-            }
-        }
-        ArrayList<SAMRecord> mappedmate = new ArrayList<SAMRecord>();
-        for (int i = 0; i < sammate.size(); i++) {
-            SAMRecord sr = sammate.get(i);
-            if (!sr.getMateUnmappedFlag()) {
-                mappedmate.add(sr);
-            }
-        }
-        if (mappedmate.size() != 0) {
-            for (int i = 0; i < mappedmate.size(); i++) {
-                SAMRecord sr = mappedmate.get(i);
-                if (virusTools.is_good_mapped_read(sr)) {
-                   return (emptyList); 
-                }
-            }
-        }
-        return(mappedmate);
-
-    }
-    
     //asume input bamfile were sorted by reads name
    
     public static void process(String inputbam, String outbam) throws IOException {
@@ -102,6 +75,6 @@ public class FilterBam_good_unmapped_mate {
 
         outputSam.close();
         reader.close();
-
+ 
     }
 }

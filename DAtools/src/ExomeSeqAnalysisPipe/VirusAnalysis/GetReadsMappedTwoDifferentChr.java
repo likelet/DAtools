@@ -13,6 +13,7 @@ import htsjdk.samtools.SamInputResource;
 import htsjdk.samtools.SamReader;
 import htsjdk.samtools.SamReaderFactory;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,42 +28,51 @@ public class GetReadsMappedTwoDifferentChr {
     // reads were assumed sorted by reads name 
 public static void process(String inputbam, String outbam) throws IOException {
         SamReader reader = SamReaderFactory.makeDefault().open(SamInputResource.of(inputbam));
+        String samplename= new File(inputbam).getName().split("_")[0];
 
         ArrayList<SAMRecord> mappedmate = new ArrayList<SAMRecord>();
-        SAMFileWriter outputSam = new SAMFileWriterFactory().setCreateIndex(true).makeSAMOrBAMWriter(reader.getFileHeader(), true, new File(outbam));
-        
-        
+        SAMFileWriter outputSam = new SAMFileWriterFactory().setCreateIndex(false).makeSAMOrBAMWriter(reader.getFileHeader(), true, new File(outbam));
         int count = 0;
-        int marker=0;
-
+        int viruscount=0;
+        int intercount=0;
         for (SAMRecord samRecord : reader) {
             count++;
             if (count % 1000000 == 0) {
-                System.out.println(count + " reads proceeded");
+//                System.out.println(count + " reads proceeded");
             }
-            if(samRecord.getContig()!=samRecord.getMateReferenceName()&&virusTools.is_good_mapped_read(samRecord)&&virusTools.is_good_read(samRecord) ){
-               outputSam.addAlignment(samRecord);
-                System.out.println("ok");
+            if(!virusTools.is_good_mapped_read(samRecord)) continue;
+            if(!virusTools.is_good_read(samRecord)) continue;
+            if(samRecord.getContig()!=samRecord.getMateReferenceName()){
+                outputSam.addAlignment(samRecord);
+                intercount++;
+            }else{
+                viruscount++;
             }
-//            if (mappedmate.size() == 0 || mappedmate.get(0).getReadName() == samRecord.getReadName()) {
-//                mappedmate.add(samRecord);
-//            } else {
-//                ArrayList<SAMRecord> templist = FilterBam_good_unmapped_mate.resolve_mates2(mappedmate.get(0),mappedmate.get(1));
-//                if(templist.size()!=0){
-//                    for (SAMRecord tempRecord : templist) {
-//                        outputSam.addAlignment(tempRecord);
-//                    }
-//                }
-//                mappedmate.clear();
-//            }
         }
+        System.out.println(samplename+"\tTotal\t"+intercount+"\treads count supporting intergration into human genome " );
+        System.out.println(samplename+"\tTotal\t"+viruscount+"\tReads mapped to virus" );
 
         outputSam.close();
         reader.close();
 
+        BuildBamIndex.buildIndexOfBam(outbam);
     }
 
     public static void main(String[] args) throws IOException {
-        GetReadsMappedTwoDifferentChr.process("E:\\data\\Virus\\to_human_EBV_byname_less_sorted.bam", "E:\\data\\Virus\\to_human_EBV_byname_less_sorted_proceed.bam");
+//        GetReadsMappedTwoDifferentChr.process("E:\\data\\Virus\\T1471TRA_to_human_EBV.bam", "E:\\data\\Virus\\T1471TRA_forIGV.bam");
+        
+          File directory = new File("E:\\data\\Virus");
+        File[] fileList = directory.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith("_to_human_EBV.bam");
+            }
+        });
+        for (File file : fileList){
+            GetReadsMappedTwoDifferentChr.process(file.getAbsolutePath(),file.getAbsolutePath().split("_")[0]+"_for_IGV.bam");
+        }
+    
+        
+        
     }
 }
